@@ -1,6 +1,9 @@
+// src/app/app.ts
+
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { HeaderComponent } from './shared/header/header'
+import { HeaderComponent } from './shared/header/header'; 
+import { AuthService } from './core/auth.service'; // <--- IMPORT AQUI
 
 @Component({
   selector: 'app-root',
@@ -11,4 +14,9 @@ import { HeaderComponent } from './shared/header/header'
 })
 export class App {
   title = 'GameLog';
+  
+  // Expor o estado de login para o template
+  isLoggedIn$ = this.authService.isLoggedIn$; // <--- PROPRIEDADE AQUI
+
+  constructor(private authService: AuthService) {} // <--- INJEÇÃO AQUI
 }
