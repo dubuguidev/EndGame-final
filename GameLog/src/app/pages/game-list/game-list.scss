@@ -1,0 +1,57 @@
+/* src/app/pages/game-list/game-list.scss */
+
+.list-container {
+  padding: 24px;
+}
+
+h1 {
+  margin-bottom: 20px;
+  color: #3f51b5; /* Cor primária do Material */
+}
+
+/* Container de Cards (Grid) */
+.game-cards-container {
+  display: grid;
+  // Layout adaptativo: 3 colunas em telas grandes, 1 em telas pequenas
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 20px;
+  padding: 20px 0; /* Espaçamento interno */
+}
+
+.game-card {
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+
+  &:hover {
+    transform: translateY(-4px); /* Efeito de elevação */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  mat-card-header {
+    padding-bottom: 0;
+  }
+  
+  mat-card-title {
+    font-size: 1.2em;
+    font-weight: 500;
+  }
+  
+  mat-card-subtitle {
+    color: #777;
+  }
+  
+  mat-card-content {
+    p {
+      margin: 8px 0;
+    }
+  }
+}
+
+/* Estilo para a mensagem de lista vazia */
+.no-games-msg {
+  grid-column: 1 / -1; /* Ocupa todas as colunas do grid */
+  text-align: center;
+  padding: 40px;
+  color: #777;
+  font-style: italic;
+}
