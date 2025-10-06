@@ -3,7 +3,7 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { CommonModule } from '@angular/common'; // <--- ONDE ESTÃO O *ngIf E | async
-import { HeaderComponent } from './shared/header/header'; 
+import { Header } from './shared/header/header'; 
 import { AuthService } from './core/auth.service';
 import { Observable } from 'rxjs'; 
 
@@ -13,7 +13,7 @@ import { Observable } from 'rxjs';
   imports: [
     CommonModule, // <--- ESTE ITEM RESOLVE O ERRO NG0302 DO | async
     RouterOutlet, 
-    HeaderComponent
+    Header
   ], 
   templateUrl: './app.html',
   styleUrls: ['./app.scss']

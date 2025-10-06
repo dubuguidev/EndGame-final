@@ -1,40 +1,37 @@
-// src/app/shared/header/header.component.ts
+// src/app/shared/header/header.ts
 
 import { Component } from '@angular/core';
-import { RouterModule } from '@angular/router'; // Para as diretivas routerLink/routerLinkActive
-import { MatToolbarModule } from '@angular/material/toolbar';
+import { Router, RouterModule } from '@angular/router'; 
+import { CommonModule } from '@angular/common'; 
 import { MatButtonModule } from '@angular/material/button';
+import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
+import { AuthService } from '../../core/auth.service'; // Caminho de ../../core/auth.service
 
 @Component({
   selector: 'app-header',
   standalone: true,
-  // Importa os módulos do Material e do Router
-  imports: [RouterModule, MatToolbarModule, MatButtonModule, MatIconModule], 
-  template: `
-    <mat-toolbar color="primary">
-      <button mat-icon-button routerLink="/">
-        <mat-icon>videogame_asset</mat-icon>
-      </button>
-      <span routerLink="/" style="cursor: pointer;">GameLog</span>
-      <span class="spacer"></span>
-      <button mat-button routerLink="/dashboard" routerLinkActive="active">Dashboard</button>
-      <button mat-button routerLink="/games" routerLinkActive="active">Meus Jogos</button>
-      <button mat-raised-button color="accent" routerLink="/games/new">
-        <mat-icon>add</mat-icon> Adicionar Jogo
-      </button>
-    </mat-toolbar>
-  `,
-  styles: [`
-    .spacer {
-      flex: 1 1 auto;
-    }
-    /* Estilo simples para indicar a rota ativa */
-    .active {
-      border-bottom: 2px solid white; 
-    }
-  `]
+  imports: [
+    CommonModule,
+    RouterModule,
+    MatToolbarModule,
+    MatButtonModule,
+    MatIconModule
+  ],
+  templateUrl: './header.html',
+  styleUrls: ['./header.scss']
 })
-export class HeaderComponent {
-  // Nada de lógica aqui, é apenas navegação
+export class Header { // Usando o nome de classe 'Header'
+  
+  constructor(
+    private authService: AuthService, 
+    private router: Router          
+  ) {}
+  
+  onLogout(): void {
+    // 1. Desloga o usuário
+    this.authService.logout();
+    // 2. Redireciona para a tela de login
+    this.router.navigate(['/login']);
+  }
 }

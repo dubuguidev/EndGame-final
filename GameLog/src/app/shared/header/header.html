@@ -1,1 +1,20 @@
-<p>header works!</p>
+<mat-toolbar color="primary">
+    <a routerLink="/dashboard" class="logo">GameLog</a>
+
+    <span class="spacer"></span>
+
+    <a mat-button routerLink="/dashboard" routerLinkActive="active">
+        Dashboard
+    </a>
+    <a mat-button routerLink="/games" routerLinkActive="active">
+        Meus Jogos
+    </a>
+    <a mat-flat-button color="accent" routerLink="/games/new">
+        <mat-icon>add</mat-icon>
+        Adicionar Jogo
+    </a>
+    
+    <button mat-flat-button (click)="onLogout()" class="logout-button">
+        Sair
+    </button>
+</mat-toolbar>
