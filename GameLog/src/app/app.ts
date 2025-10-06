@@ -1,12 +1,17 @@
-import { Component, signal } from '@angular/core';
+// src/app/app.ts
+
+import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
+import { HeaderComponent } from './shared/header/header'; // <--- Importe aqui!
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet],
+  standalone: true,
+  // Adicione HeaderComponent e RouterOutlet aos imports
+  imports: [RouterOutlet, HeaderComponent], 
   templateUrl: './app.html',
-  styleUrl: './app.scss'
+  styleUrls: ['./app.scss']
 })
-export class App {
-  protected readonly title = signal('GameLog');
+export class AppComponent {
+  title = 'GameLog';
 }
