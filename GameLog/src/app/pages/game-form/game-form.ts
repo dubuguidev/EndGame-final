@@ -36,7 +36,7 @@ import { Game, GameStatus } from '../../models/game.model';
   templateUrl: './game-form.html',
   styleUrls: ['./game-form.scss']
 })
-export class GameFormComponent implements OnInit {
+export class GameForm implements OnInit {
   
   gameForm!: FormGroup;
   isEditMode = false;

@@ -31,7 +31,7 @@ import { FilterByStatusPipe } from '../../shared/pipes/filter-by-status.pipe'; /
   templateUrl: './game-list.html',
   styleUrls: ['./game-list.scss']
 })
-export class GameListComponent {
+export class GameList {
   
   // O Observable de jogos (usamos o pipe async no template)
   games$ = this.gameService.games$;

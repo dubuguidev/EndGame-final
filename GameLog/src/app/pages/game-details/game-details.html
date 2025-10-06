@@ -1,1 +1,53 @@
-<p>game-detalis works!</p>
+<div class="details-container">
+  <mat-card *ngIf="game" class="game-details-card">
+    
+    <mat-card-header>
+      <mat-icon mat-card-avatar>{{ getPlatformIcon(game.platform) }}</mat-icon>
+      <mat-card-title>{{ game.title }}</mat-card-title>
+      <mat-card-subtitle>{{ game.platform }} | {{ game.genre }}</mat-card-subtitle>
+    </mat-card-header>
+
+    <mat-card-content class="details-content">
+      
+      <div class="status-info">
+        <h3>Status: <span>{{ game.status | uppercase }}</span></h3>
+      </div>
+      
+      <div class="metrics-grid">
+        <p><strong>Progresso:</strong> {{ game.progress }}%</p>
+        <mat-progress-bar mode="determinate" [value]="game.progress"></mat-progress-bar>
+        
+        <p *ngIf="game.hoursPlayed"><strong>Horas Jogadas:</strong> {{ game.hoursPlayed }}h</p>
+        <p *ngIf="game.rating"><strong>Avaliação:</strong> {{ game.rating }} / 5 ⭐</p>
+        
+        <p *ngIf="game.startDate"><strong>Início:</strong> {{ game.startDate | date }}</p>
+        <p *ngIf="game.finishDate"><strong>Conclusão:</strong> {{ game.finishDate | date }}</p>
+      </div>
+
+      <div *ngIf="game.notes" class="notes-section">
+        <h3>Observações</h3>
+        <p>{{ game.notes }}</p>
+      </div>
+      
+    </mat-card-content>
+
+    <mat-card-actions class="details-actions">
+      <button mat-raised-button color="primary" [routerLink]="['/games/edit', game.id]">
+        <mat-icon>edit</mat-icon> Editar
+      </button>
+      <button mat-button color="warn" (click)="onDelete()">
+        <mat-icon>delete</mat-icon> Excluir
+      </button>
+      
+      <span class="spacer"></span>
+      <button mat-button routerLink="/games">Voltar para a Lista</button>
+    </mat-card-actions>
+  </mat-card>
+  
+  <mat-card *ngIf="!game">
+    <mat-card-content>
+      <p>Jogo não encontrado.</p>
+      <button mat-button routerLink="/games">Voltar</button>
+    </mat-card-content>
+  </mat-card>
+</div>
