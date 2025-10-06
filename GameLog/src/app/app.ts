@@ -1,9 +1,9 @@
-// src/app/app.ts
-
 import { Component } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { RouterOutlet } from '@angular/router';
 import { HeaderComponent } from './shared/header/header'; 
-import { AuthService } from './core/auth.service'; // <--- IMPORT AQUI
+import { AuthService } from './core/auth.service';
+import { Observable } from 'rxjs'; // <--- PRECISA DE Observable
 
 @Component({
   selector: 'app-root',
@@ -15,8 +15,11 @@ import { AuthService } from './core/auth.service'; // <--- IMPORT AQUI
 export class App {
   title = 'GameLog';
   
-  // Expor o estado de login para o template
-  isLoggedIn$ = this.authService.isLoggedIn$; // <--- PROPRIEDADE AQUI
+  // 1. Apenas declara a propriedade (adicionando o tipo Observable)
+  isLoggedIn$!: Observable<boolean>; 
 
-  constructor(private authService: AuthService) {} // <--- INJEÇÃO AQUI
+  constructor(private authService: AuthService) {
+    // 2. Inicializa a propriedade DENTRO do construtor, onde 'this.authService' existe
+    this.isLoggedIn$ = this.authService.isLoggedIn$;
+  }
 }
