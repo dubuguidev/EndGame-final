@@ -1,19 +1,37 @@
-<div class="list-container">
+<div class="list-container mat-elevation-z1">
+  <h1>Meus Jogos</h1>
+  
   <mat-tab-group animationDuration="0ms">
+    
     <mat-tab *ngFor="let status of statuses" [label]="status | uppercase">
-      <div *ngIf="games$ | async as allGames" class="game-cards-container">
-        <mat-card *ngFor="let game of allGames | filterByStatus: status" [routerLink]="['/games', game.id]">
-          <mat-card-header>
-            <mat-card-title>{{ game.title }}</mat-card-title>
-            <mat-card-subtitle>{{ game.platform }}</mat-card-subtitle>
-          </mat-card-header>
-          <mat-card-content>
-            <p>Progresso: {{ game.progress }}%</p>
-            <mat-progress-bar mode="determinate" [value]="game.progress"></mat-progress-bar>
-          </mat-card-content>
-        </mat-card>
-        <p *ngIf="(allGames | filterByStatus: status).length === 0" class="no-games-msg">Nenhum jogo nesta categoria.</p>
-      </div>
+      
+      <ng-container *ngIf="games$ | async as allGames">
+          
+          <div class="game-cards-container">
+            
+            <mat-card 
+              *ngFor="let game of allGames | filterByStatus: status" 
+              [routerLink]="['/games', game.id]"
+              class="game-card"
+            >
+              <mat-card-header>
+                <mat-card-title>{{ game.title }}</mat-card-title>
+                <mat-card-subtitle>{{ game.platform }} ({{ game.genre }})</mat-card-subtitle>
+              </mat-card-header>
+              
+              <mat-card-content>
+                <p>Progresso: <strong>{{ game.progress }}%</strong></p>
+                <mat-progress-bar mode="determinate" [value]="game.progress"></mat-progress-bar>
+              </mat-card-content>
+            </mat-card>
+            
+            <p *ngIf="(allGames | filterByStatus: status).length === 0" class="no-games-msg">
+              Nenhum jogo na categoria "{{ status | uppercase }}".
+            </p>
+
+          </div>
+      </ng-container>
+      
     </mat-tab>
   </mat-tab-group>
 </div>

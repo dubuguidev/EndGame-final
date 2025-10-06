@@ -1,5 +1,3 @@
-// src/app/pages/dashboard/dashboard.ts
-
 import { Component } from '@angular/core'; // Removido OnInit, pois não é estritamente necessário
 import { CommonModule } from '@angular/common';
 import { MatCardModule } from '@angular/material/card';
@@ -27,7 +25,7 @@ interface Stats {
   templateUrl: './dashboard.html', // Assumindo que o template é dashboard.html
   styleUrls: ['./dashboard.scss']
 })
-// USANDO O NOME EXATO DA SUA CLASSE
+
 export class Dashboard { 
   
   // Observable que mapeia a lista de jogos para as estatísticas

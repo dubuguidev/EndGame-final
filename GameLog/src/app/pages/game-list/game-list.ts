@@ -1,45 +1,44 @@
-// src/app/pages/game-list/game-list.component.ts
+// src/app/pages/game-list/game-list.ts
 
 import { Component } from '@angular/core';
-import { CommonModule } from '@angular/common'; // Para *ngFor, *ngIf e async pipe
-import { RouterModule } from '@angular/router'; // Para routerLink
+import { CommonModule } from '@angular/common';
+import { RouterModule } from '@angular/router'; 
+// Adicione Observable aqui se ainda não tiver
+import { Observable } from 'rxjs'; 
 
-// Imports do Material (Necessário para a listagem)
+// Imports do Material
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatCardModule } from '@angular/material/card';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 
-// Imports de Lógica (Com caminhos relativos CORRIGIDOS)
+// IMPORTS DE LÓGICA (CAMINHOS RELATIVOS CORRIGIDOS)
 import { GameService } from '../../core/game.service';
-import { GameStatus } from '../../models/game.model';
-import { FilterByStatusPipe } from '../../shared/pipes/filter-by-status-pipe'; // O Pipe Standalone
+import { GameStatus, Game } from '../../models/game.model'; // Adicione Game
+import { FilterByStatusPipe } from '../../shared/pipes/filter-by-status-pipe'; 
 
 @Component({
   selector: 'app-game-list',
   standalone: true,
-  // ----------------------------------------------------
-  // GARANTINDO QUE TODOS OS MÓDULOS ESTEJAM AQUI (STANDALONE)
-  // ----------------------------------------------------
   imports: [
     CommonModule,
     RouterModule,
     MatTabsModule,
     MatCardModule,
     MatProgressBarModule,
-    FilterByStatusPipe // Importa o Pipe Standalone
+    FilterByStatusPipe 
   ],
-  templateUrl: './game-list.html',
+  templateUrl: './game-list.html', 
   styleUrls: ['./game-list.scss']
 })
-export class GameList {
+export class GameList { 
   
-  // O Observable de jogos (usamos o pipe async no template)
-  games$: typeof this.gameService.games$;
+  // Certifique-se que o tipo seja Observable<Game[]>.
+  games$: Observable<Game[]>;
 
   // Status para navegação por abas
   statuses: GameStatus[] = ['Playing', 'To Play', 'Played'];
 
-  // O GameService é injetado no construtor (providedIn: 'root')
+  // O GameService é injetado.
   constructor(private gameService: GameService) {
     this.games$ = this.gameService.games$;
   }

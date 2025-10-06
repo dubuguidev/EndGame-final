@@ -1,5 +1,3 @@
-// src/app/core/game.service.ts
-
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { Game } from '../models/game.model';
