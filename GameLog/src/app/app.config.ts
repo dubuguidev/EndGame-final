@@ -1,30 +1,35 @@
-// src/app/app.config.ts
+// src/app/app.config.ts (Versão Completa e Final)
 
 import { ApplicationConfig, provideZoneChangeDetection } from '@angular/core';
-import { provideRouter } from '@angular/router'; // <-- ESSENCIAL PARA O ROTEAMENTO
-
+import { provideRouter } from '@angular/router'; 
 import { routes } from './app.routes'; 
 import { provideClientHydration } from '@angular/platform-browser';
-import { provideAnimations } from '@angular/platform-browser/animations'; // <-- ESSENCIAL PARA O MATERIAL
-
-// Se você estiver usando Reactive Forms no projeto (e nós estamos!), adicione este:
-import { provideHttpClient } from '@angular/common/http';
-import { withInterceptorsFromDi } from '@angular/common/http';
+import { provideAnimations } from '@angular/platform-browser/animations'; 
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
+// <--- NOVO IMPORT AQUI: Suporte a Reactive Forms
+import { provideState, provideStore } from '@ngrx/store';
 
 export const appConfig: ApplicationConfig = {
   providers: [
     provideZoneChangeDetection({ eventCoalescing: true }),
     
-    // 1. FORNECE O ROTEAMENTO (Chama o app.routes.ts)
+    // Roteamento
     provideRouter(routes), 
     
-    // 2. FORNECE AS ANIMAÇÕES (NECESSÁRIO para o Angular Material e MatTabs)
+    // Animações (para Material)
     provideAnimations(), 
     
-    // 3. (Opcional, mas boa prática)
-    provideClientHydration(),
+    // HTTP
+    provideHttpClient(withInterceptorsFromDi()),
     
-    // 4. Se você planeja usar HTTP (que o Angular Material usa internamente)
-    provideHttpClient(withInterceptorsFromDi())
+    // Se você estiver usando Forms, você deve adicionar o fornecimento aqui
+    // Embora o ReactiveFormsModule possa ser importado no componente, a configuração do estado pode ser crucial:
+    // TENTE ADICIONAR ESTE ABAIXO SE A TELA AINDA ESTIVER EM BRANCO. 
+    // provideState({}), 
+    // provideStore({}),
+    
+    // ... [outros fornecedores que você possa ter]
+    
+    provideClientHydration(),
   ]
 };

@@ -9,7 +9,7 @@ import { Router } from '@angular/router';
 import { MatCardModule } from '@angular/material/card';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
-import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatCheckboxModule } from '@angular/material/checkbox'; 
 
 // AuthService (Vamos criar este Serviço no próximo passo)
 import { AuthService } from '../../core/auth.service'; // Caminho relativo
