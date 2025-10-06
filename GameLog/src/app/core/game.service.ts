@@ -16,6 +16,7 @@ export class GameService {
   ];
 
   private gamesSubject = new BehaviorSubject<Game[]>(this.games);
+  games$: any;
 
   getGames(): Observable<Game[]> {
     return this.gamesSubject.asObservable();

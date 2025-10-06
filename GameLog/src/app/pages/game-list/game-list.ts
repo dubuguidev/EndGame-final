@@ -12,7 +12,7 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
 // Imports de Lógica (Com caminhos relativos CORRIGIDOS)
 import { GameService } from '../../core/game.service';
 import { GameStatus } from '../../models/game.model';
-import { FilterByStatusPipe } from '../../shared/pipes/filter-by-status.pipe'; // O Pipe Standalone
+import { FilterByStatusPipe } from '../../shared/pipes/filter-by-status-pipe'; // O Pipe Standalone
 
 @Component({
   selector: 'app-game-list',
@@ -34,11 +34,13 @@ import { FilterByStatusPipe } from '../../shared/pipes/filter-by-status.pipe'; /
 export class GameList {
   
   // O Observable de jogos (usamos o pipe async no template)
-  games$ = this.gameService.games$;
+  games$: typeof this.gameService.games$;
 
   // Status para navegação por abas
   statuses: GameStatus[] = ['Playing', 'To Play', 'Played'];
 
   // O GameService é injetado no construtor (providedIn: 'root')
-  constructor(private gameService: GameService) { }
+  constructor(private gameService: GameService) {
+    this.games$ = this.gameService.games$;
+  }
 }

@@ -9,7 +9,7 @@ import { map } from 'rxjs/operators';
 
 // CORREÇÃO DOS CAMINHOS RELATIVOS
 import { GameService } from '../../core/game.service';
-import { Game , GameStatus } from '../../models/game.model';
+import { Game, GameStatus } from '../../models/game.model';
 
 interface Stats {
   total: number;
@@ -31,11 +31,13 @@ interface Stats {
 export class Dashboard { 
   
   // Observable que mapeia a lista de jogos para as estatísticas
-  stats$: Observable<Stats> = this.gameService.games$.pipe(
-    map(games => this.calculateStats(games))
-  );
+  stats$: Observable<Stats>;
 
-  constructor(private gameService: GameService) {}
+  constructor(private gameService: GameService) {
+    this.stats$ = this.gameService.games$.pipe(
+      map(games => this.calculateStats(games as Game[]))
+    );
+  }
 
   private calculateStats(games: Game[]): Stats {
     const totalHours = games
