@@ -1,57 +1,64 @@
+// src/app/app.routes.ts
+
 import { Routes } from '@angular/router';
-import { AuthGuard } from './core/auth.guard';
+import { AuthGuard } from './core/auth.guard'; 
 
 export const routes: Routes = [
-  
+  // Rota de Login/Autenticação (Corrigida de c.Auth para c.Login)
   {
     path: 'login',
-    loadComponent: () => import('./pages/auth/auth')
-      .then(c => c.Auth),
+    loadComponent: () => 
+      import('./pages/auth/auth') 
+      .then(c => c.Login), // <--- CORREÇÃO
     title: 'Login - EndGame'
   },
+  
+  // Rota de Cadastro (NOVA)
+  {
+    path: 'register',
+    loadComponent: () => 
+      import('./pages/auth/register') 
+      .then(c => c.Register),
+    title: 'Cadastro - EndGame'
+  },
+  
+  // Rota Principal
   {
     path: '',
     redirectTo: 'dashboard',
     pathMatch: 'full'
   },
+  
+  // Rotas Protegidas (Dashboard e Jogos)
   {
     path: 'dashboard',
-  loadComponent: () => import('./pages/dashboard/dashboard') 
-    .then(c => c.Dashboard),
-  canActivate: [AuthGuard], // protegeninho a rotinha 
-  title: 'GameLog - Dashboard'
+    loadComponent: () => import('./pages/dashboard/dashboard')
+      .then(c => c.Dashboard),
+    canActivate: [AuthGuard],
+    title: 'GameLog - Dashboard'
   },
-  // 2. Rota Principal para o Gerenciamento de Jogos
   {
-  path: 'games',
-  canActivate: [AuthGuard],
+    path: 'games',
+    canActivate: [AuthGuard],
     children: [
       {
-        path: '', // /games
-        loadComponent: () => import('./pages/game-list/game-list') 
-          .then(c => c.GameList), 
+        path: '', 
+        loadComponent: () => import('./pages/game-list/game-list')
+          .then(c => c.GameList),
         title: 'Meus Jogos'
       },
       {
         path: 'new', 
         loadComponent: () => import('./pages/game-form/game-form')
-          .then(c => c.GameForm), 
-        title: 'Adicionar Jogo'
-      },
-      {
-        path: 'edit/:id', 
-        loadComponent: () => import('./pages/game-form/game-form')
-          .then(c => c.GameForm), 
-        title: 'Editar Jogo'
-      },
-      {
-        path: ':id',
-        loadComponent: () => import('./pages/game-details/game-details') 
-          .then(c => c.GameDetails), 
-        title: 'Detalhes do Jogo'
-      },
+          .then(c => c.GameForm)
+      }
     ]
-},
-  // Rota curinga para 404
-  { path: '**', redirectTo: 'dashboard' }
+  },
+  
+  // Rota Wildcard (404)
+  {
+    path: '**',
+    redirectTo: 'dashboard'
+    // Você pode criar um componente 404/NotFound aqui.
+  }
 ];
