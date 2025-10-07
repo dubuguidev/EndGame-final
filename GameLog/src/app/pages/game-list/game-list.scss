@@ -1,63 +1,102 @@
-/* src/app/pages/game-list/game-list.scss */
+// src/app/pages/game-list/game-list.scss
 
-$color-accent: #33FF7A;
-$color-primary: #FFFFFF;
-$color-secondary: #2C2C2C;
-
-.list-container {
+.game-list-container {
     padding: 20px;
-    max-width: 1200px;
-    margin: 0 auto;
+}
 
-    // Estilização das Tabs (Status: Playing, To Play, Played)
-    .mat-tab-group {
-        margin-bottom: 20px;
-        
-        // Cor do indicador e do label ativo em Verde
-        .mat-tab-label-active {
-            color: $color-accent !important;
-            font-weight: 500;
-        }
-        .mat-ink-bar {
-            background-color: $color-accent !important;
-        }
-    }
+h2 {
+    color: #ffffff;
+    margin-bottom: 20px;
+}
 
-    // Container dos Cards (Grid)
-    .game-cards-container {
-        display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-        gap: 20px;
-    }
+.game-tabs {
+    /* Cor de fundo das abas (Material Design) */
+    background-color: transparent; 
+}
 
-    // Card Individual do Jogo
-    .mat-card {
-        cursor: pointer;
-        transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out, border 0.2s ease-in-out;
-        border: 1px solid transparent; // Borda inicial transparente
+/* Estiliza o conteúdo da aba */
+.tab-content {
+    padding: 15px 0;
+}
 
-        // Efeito de HOVER nas Cards
-        &:hover {
-            transform: translateY(-3px); // Leve ascensão
-            box-shadow: 0 8px 15px rgba(51, 255, 122, 0.2); // Sombra verde no hover
-            border: 1px solid $color-accent; // Borda sutil verde
-        }
-
-        mat-card-subtitle {
-            color: $color-accent; // Plataforma em Verde
-            font-weight: 500;
-            margin-top: 5px;
-        }
-
-        // Cor da Barra de Progresso
-        .mat-progress-bar-fill::after {
-            background-color: $color-accent; 
-        }
-    }
+/* Estilo para cada linha de jogo na lista */
+.game-item-row {
+    display: flex;
+    align-items: center; /* Alinha verticalmente imagem e texto */
+    padding: 15px 0;
+    border-bottom: 1px solid #282828; /* Separador sutil */
     
-    .no-games-msg {
-        text-align: center;
-        margin-top: 50px;
-        color: #999;
+    &:last-child {
+        border-bottom: none; /* Remove a linha do último item */
     }
+}
+
+/* Estilo da miniatura da Imagem */
+.game-list-image {
+    width: 60px;  /* Largura padronizada para miniatura */
+    height: 90px; /* Altura padronizada para miniatura (proporção de capa) */
+    object-fit: cover;
+    margin-right: 20px; /* Espaçamento com o texto */
+    border-radius: 4px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+}
+
+.game-item-details {
+    flex-grow: 1; /* Ocupa o máximo de espaço possível */
+    color: #ffffff;
+
+    .game-title {
+        font-size: 1.1em;
+        font-weight: bold;
+        margin: 0 0 5px 0;
+    }
+    .game-info {
+        font-size: 0.9em;
+        color: #a0a0a0;
+        margin: 0 0 10px 0;
+    }
+    .progress-text {
+        font-size: 0.85em;
+        color: #2ecc71;
+        margin-top: 5px;
+    }
+}
+
+/* Estilo da barra de progresso do Material */
+mat-progress-bar {
+    height: 6px;
+    border-radius: 3px;
+    margin-bottom: 5px;
+}
+
+.game-actions {
+    display: flex;
+    gap: 5px;
+    
+    button {
+        color: #2ecc71;
+    }
+}
+
+.empty-list-message {
+    color: #a0a0a0;
+    text-align: center;
+    padding: 30px 0;
+}
+
+/* src/app/pages/game-list/game-list.scss (Trecho Essencial) */
+
+.game-list-image {
+    width: 60px;  /* Largura padronizada */
+    height: 90px; /* Altura padronizada (se estiver em 0px, não aparece) */
+    object-fit: cover;
+    margin-right: 20px; 
+    border-radius: 4px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+}
+
+.game-item-row {
+    display: flex;
+    align-items: center; 
+    /* ... outros estilos ... */
 }

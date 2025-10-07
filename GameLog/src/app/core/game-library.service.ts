@@ -37,6 +37,7 @@ export class GameLibraryService {
       coverUrl: '/assets/images/zelda_totk.jpg',
       imageUrl: '/assets/images/zelda_totk_card.jpg',
     },
+    
     // ... outros jogos originais aqui
   ];
 

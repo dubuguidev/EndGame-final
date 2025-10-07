@@ -1,10 +1,8 @@
-// src/app/core/game.service.ts
-
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { Game, GameStatus } from '../models/game.model'; // Importa o modelo Game
+import { Game, GameStatus } from '../models/game.model';
 
-// Interface para as estatísticas
+// Interface para as estatísticas (se você estiver usando no dashboard)
 interface GameStats {
   total: number;
   playing: number;
@@ -17,7 +15,7 @@ interface GameStats {
 })
 export class GameService {
   
-  // Lista de jogos UNIFICADA com caminhos corrigidos
+  // Lista de jogos UNIFICADA com caminhos corrigidos (assets/images/)
   private gameList: Game[] = [
     {
       id: '1',
@@ -57,31 +55,58 @@ export class GameService {
       notes: 'Um RPG de mundo aberto aclamado pela crítica com escolhas morais profundas.',
       hoursToBeat: 100,
       imageUrl: 'https://sm.ign.com/t/ign_br/video/t/the-first-/the-first-15-minutes-of-the-witcher-3-wild-hunt-ig_4bwz.1200.jpg',
+    },
+    {
+      id: '4',
+      title: 'God of War Ragnarök',
+      platform: 'PC & PS5',
+      genre: 'RPG de Ação',
+      status: 'Quero jogar' as GameStatus,
+      progress: 0,
+      hoursPlayed: 0,
+      notes: 'Um jogo de ação e aventura no qual Kratos e seu filho Atreus viajam pelos Nove Reinos para evitar o Ragnarök.',
+      hoursToBeat: 70,
+      imageUrl: 'https://image.api.playstation.com/vulcan/ap/rnd/202207/1117/4uH3OH4dQtHMe2gmdFuth02u.jpg',
+    },
+    {
+      id: '5',
+      title: 'Doom: The Dark Ages',
+      platform: 'PC, PS4, Xbox One, Switch',
+      genre: 'Tiro em primeira pessoa',
+      status: 'Quero jogar' as GameStatus,
+      progress: 0,
+      hoursPlayed: 0,
+      notes: 'É uma prequel que mostra as origens do DOOM Slayer, o "superarma" de reis e deuses, em um passado medieval sombrio.',
+      hoursToBeat: 30,
+      imageUrl: 'https://images.mweb.bethesda.net/_images/doom-the-dark-ages/doom-tda-premium-banner.webp?f=jpg&h=1030&w=1858&s=RUEHO3D3bUaIF88RAvCBhkU75xNd6nnDXHv5TaiDOAw',
+    },
+    {
+      id: '6',
+      title: "Assassin's Creed Shadows",
+      platform: 'PC, PS5, Xbox One, Switch',
+      genre: 'Mundo Aberto',
+      status: 'Quero jogar' as GameStatus,
+      progress: 0,
+      hoursPlayed: 0,
+      notes: 'A história se passa no Japão feudal, no final do período Sengoku, onde os jogadores vivenciam a saga de dois protagonistas distintos: Naoe, uma ninja habilidosa vingativa, e Yasuke, um samuraio africano poderoso e lendário.',
+      hoursToBeat: 100,
+      imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQKg6Os3SG0h69-mBSenILlmRPsvzgJhFjfcw&s',
     }
   ];
 
-  // BehaviorSubject que gerencia o estado da lista de jogos
-  private gamesSubject = new BehaviorSubject<Game[]>(this.gameList);
-  
-  // Observable público que os componentes consomem
+   private gamesSubject = new BehaviorSubject<Game[]>(this.gameList);
   public games$: Observable<Game[]> = this.gamesSubject.asObservable();
 
   constructor() { }
   
-  // ======================================================
-  // MÉTODOS DE LEITURA (READ)
-  // ======================================================
-
   getGames(): Observable<Game[]> {
     return this.games$;
   }
 
-  // MÉTODO NECESSÁRIO PARA RESOLVER ERRO TS2339 (GameDetails/GameForm)
   getGameById(id: string): Game | undefined {
     return this.gameList.find(game => game.id === id);
   }
   
-  // Método para obter as estatísticas do Dashboard
   getStats(): Observable<GameStats> {
     const games = this.gamesSubject.getValue();
     const stats = {
@@ -93,27 +118,19 @@ export class GameService {
     return new BehaviorSubject(stats).asObservable();
   }
 
-  // ======================================================
-  // MÉTODOS DE ESCRITA (CREATE, UPDATE, DELETE)
-  // ======================================================
-
-  // MÉTODO NECESSÁRIO PARA RESOLVER ERRO TS2339 (GameForm)
   saveGame(game: Game): void {
     const currentGames = this.gamesSubject.getValue();
     const existingIndex = currentGames.findIndex(g => g.id === game.id);
 
     if (existingIndex > -1) {
-      // Atualizar
       currentGames[existingIndex] = game;
     } else {
-      // Criar novo jogo
       game.id = game.id || Date.now().toString(); 
       currentGames.push(game);
     }
     this.gamesSubject.next(currentGames);
   }
 
-  // MÉTODO NECESSÁRIO PARA RESOLVER ERRO TS2339 (GameDetails)
   deleteGame(id: string): void {
     let currentGames = this.gamesSubject.getValue();
     currentGames = currentGames.filter(game => game.id !== id);

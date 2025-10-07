@@ -1,37 +1,64 @@
-<div class="list-container mat-elevation-z1">
-  <h1>Jogos</h1>
-  
-  <mat-tab-group animationDuration="0ms">
-    
-    <mat-tab *ngFor="let status of statuses" [label]="status | uppercase">
-      
-      <ng-container *ngIf="games$ | async as allGames">
-          
-          <div class="game-cards-container">
-            
-            <mat-card 
-              *ngFor="let game of allGames | filterByStatus: status" 
-              [routerLink]="['/games', game.id]"
-              class="game-card"
-            >
-              <mat-card-header>
-                <mat-card-title>{{ game.title }}</mat-card-title>
-                <mat-card-subtitle>{{ game.platform }} ({{ game.genre }})</mat-card-subtitle>
-              </mat-card-header>
-              
-              <mat-card-content>
-                <p>Progresso: <strong>{{ game.progress }}%</strong></p>
-                <mat-progress-bar mode="determinate" [value]="game.progress"></mat-progress-bar>
-              </mat-card-content>
-            </mat-card>
-            
-            <p *ngIf="(allGames | filterByStatus: status).length === 0" class="no-games-msg">
-              Nenhum jogo na categoria "{{ status | uppercase }}".
-            </p>
+<div class="game-list-container">
+    <h2>Jogos</h2>
 
-          </div>
-      </ng-container>
-      
-    </mat-tab>
-  </mat-tab-group>
+    <mat-tab-group mat-align-tabs="start" class="game-tabs">
+
+        <mat-tab label="TERMINADO">
+            <div class="tab-content">
+                <ng-container *ngIf="finishedGames$ | async as games">
+                    <div *ngFor="let game of games" class="game-item-row">
+                        
+                        <img [src]="game.imageUrl" alt="{{ game.title }} Cover" class="game-list-image">
+                        
+                        <div class="game-item-details">
+                            <h3 class="game-title">{{ game.title }}</h3>
+                            <p class="game-info">{{ game.platform }} ({{ game.genre }})</p>
+                            
+                            <mat-progress-bar mode="determinate" [value]="game.progress"></mat-progress-bar>
+                            <p class="progress-text">Progresso: {{ game.progress }}%</p>
+                        </div>
+
+                        <div class="game-actions">
+                            <button mat-icon-button (click)="viewDetails(game.id)">
+                                <mat-icon>visibility</mat-icon>
+                            </button>
+                            <button mat-icon-button (click)="editGame(game.id)">
+                                <mat-icon>edit</mat-icon>
+                            </button>
+                        </div>
+                    </div>
+                    <p *ngIf="games.length === 0" class="empty-list-message">Nenhum jogo terminado ainda.</p>
+                </ng-container>
+            </div>
+        </mat-tab>
+
+        <mat-tab label="TÔ JOGANDO">
+            <div class="tab-content">
+                <ng-container *ngIf="playingGames$ | async as games">
+                    <div *ngFor="let game of games" class="game-item-row">
+                        <img [src]="game.imageUrl" alt="{{ game.title }} Cover" class="game-list-image">
+                        <div class="game-item-details">
+                            <h3 class="game-title">{{ game.title }}</h3>
+                            </div>
+                    </div>
+                    <p *ngIf="games.length === 0" class="empty-list-message">Nenhum jogo em andamento.</p>
+                </ng-container>
+            </div>
+        </mat-tab>
+
+        <mat-tab label="QUERO JOGAR">
+            <div class="tab-content">
+                <ng-container *ngIf="toPlayGames$ | async as games">
+                    <div *ngFor="let game of games" class="game-item-row">
+                        <img [src]="game.imageUrl" alt="{{ game.title }} Cover" class="game-list-image">
+                        <div class="game-item-details">
+                            <h3 class="game-title">{{ game.title }}</h3>
+                            </div>
+                    </div>
+                    <p *ngIf="games.length === 0" class="empty-list-message">Nenhum jogo na lista de desejos.</p>
+                </ng-container>
+            </div>
+        </mat-tab>
+
+    </mat-tab-group>
 </div>
