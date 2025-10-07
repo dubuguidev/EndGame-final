@@ -1,45 +1,87 @@
-$color-accent: #33FF7A;
-$color-dark: #121212;
+/* src/app/pages/game-form/game-form.scss */
 
-.game-form-wrapper {
-  // Centraliza o card do formulário na tela
-  display: flex;
-  justify-content: center;
-  margin-top: 30px;
-  padding: 0 20px;
-
-  .mat-card {
-    width: 100%;
-    max-width: 800px;
+.form-container {
     padding: 30px;
+    max-width: 900px; /* Limita a largura para melhor leitura */
+    margin: 40px auto; /* Centraliza o formulário */
+    background-color: #141414; 
+    color: #ffffff;
+}
+
+h2 {
+    color: #ffffff;
+    margin-bottom: 5px;
+    font-size: 2em;
+}
+
+.subtitle {
+    color: #A2FF01; /* Usa a cor de destaque */
+    margin-bottom: 30px;
+    font-size: 1.1em;
+}
+
+/* ----------------------------------------------------------------- */
+/* LAYOUT GRID PARA CAMPOS ALINHADOS                                 */
+/* ----------------------------------------------------------------- */
+.form-grid {
+    display: grid;
+    /* 3 colunas, com gap de 20px */
+    grid-template-columns: repeat(3, 1fr); 
+    gap: 20px;
+    margin-bottom: 20px;
     
-    mat-card-title {
-      color: $color-accent;
-      margin-bottom: 20px;
-      text-align: center;
+    .full-width {
+        grid-column: span 3; /* Ocupa as 3 colunas */
     }
+}
 
-    // Estilização do Mat-Stepper (Progresso)
-    mat-horizontal-stepper {
-      margin: 20px 0 40px 0;
-      padding: 0;
-
-      // Cor do círculo do passo ativo
-      .mat-step-header[aria-selected="true"] {
-        .mat-step-icon {
-          background-color: $color-accent;
-          color: $color-dark; // Texto Preto no círculo Verde
-        }
-        .mat-step-label {
-          color: $color-accent; // Cor do Label ativo em Verde
-          font-weight: 500;
-        }
-      }
-      
-      // Linha separadora do stepper em verde
-      .mat-stepper-horizontal-line {
-        border-top-color: $color-accent;
-      }
+/* ----------------------------------------------------------------- */
+/* SLIDER E TEXTAREA (Campos de largura total fora do grid)          */
+/* ----------------------------------------------------------------- */
+.progress-section {
+    padding: 10px 0;
+    margin-bottom: 20px;
+    
+    mat-label {
+        color: #A2FF01;
+        font-weight: bold;
     }
-  }
+    
+    mat-slider {
+        width: 100%;
+        margin-top: 10px;
+    }
+}
+
+.full-width {
+    width: 100%;
+}
+
+
+/* ----------------------------------------------------------------- */
+/* ALINHAMENTO DOS BOTÕES (Conforme solicitado)                       */
+/* ----------------------------------------------------------------- */
+.button-actions {
+    display: flex;
+    justify-content: flex-end; /* Alinha os botões à direita */
+    gap: 15px;
+    margin-top: 30px;
+    
+    button {
+        padding: 0 30px;
+        height: 48px;
+    }
+    
+    /* Estilo específico para o botão Cancelar (secundário) */
+    .mat-button {
+        color: #A2FF01 !important; 
+        border: 1px solid #434343;
+        background: transparent !important;
+        box-shadow: none !important;
+        
+        &:hover {
+            border-color: #A2FF01;
+            transform: none; /* Não move o cancelar */
+        }
+    }
 }

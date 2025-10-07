@@ -1,31 +1,24 @@
-// src/app/core/auth.guard.ts
+// src/app/auth/auth.guard.ts
 
-import { Injectable } from '@angular/core';
-import { CanActivate, Router, UrlTree } from '@angular/router';
-import { Observable } from 'rxjs';
-import { map, take } from 'rxjs/operators';
-import { AuthService } from './auth.service'; // Certifique-se de que o caminho está correto
+import { inject } from '@angular/core';
+import { CanActivateFn, Router } from '@angular/router';
 
-@Injectable({
-  providedIn: 'root'
-})
-export class AuthGuard implements CanActivate {
+// A CHAVE DEVE SER EXATAMENTE IGUAL EM TODOS OS LUGARES
+const AUTH_TOKEN_KEY = 'auth_token'; 
+
+export const authGuard: CanActivateFn = (route, state) => {
+  const router = inject(Router);
   
-  constructor(private authService: AuthService, private router: Router) {}
+  // 1. Verifica se o token existe no localStorage.
+  const token = localStorage.getItem(AUTH_TOKEN_KEY);
 
-  canActivate(): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-    
-    // CORREÇÃO: Usando isLoggedIn$ corretamente (resolve TS2551 se o erro persistir)
-    return this.authService.isLoggedIn$.pipe(
-      take(1),
-      map(isLoggedIn => {
-        if (isLoggedIn) {
-          return true; // Usuário logado: permite acesso.
-        } else {
-          // Usuário NÃO logado: redireciona para a rota de login
-          return this.router.createUrlTree(['/login']); 
-        }
-      })
-    );
+  if (token) {
+    // 2. Se o token existir, permite o acesso.
+    return true;
+  } else {
+    // 3. Se não existir, redireciona para a tela de login.
+    console.log('AuthGuard: Acesso bloqueado. Redirecionando para /login');
+    router.navigate(['/login']);
+    return false;
   }
-}
+};

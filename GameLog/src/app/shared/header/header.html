@@ -1,16 +1,17 @@
-<mat-toolbar color="primary">
-    <a routerLink="/dashboard" class="logo">EndGame</a>
-    
-    <a mat-button routerLink="/dashboard">Dashboard</a>
-    <a mat-button routerLink="/games">Meus Jogos</a>
-    
-    <a mat-flat-button color="accent" routerLink="/games/new">
-        <mat-icon>add</mat-icon> Adicionar Jogo
-    </a>
+<mat-toolbar class="app-header">
+    <div class="logo">
+        <a routerLink="/dashboard">EndGame</a>
+    </div>
+
+    <nav class="main-nav">
+        <a mat-button routerLink="/dashboard" routerLinkActive="active">Dashboard</a>
+        <a mat-button routerLink="/meus-jogos" routerLinkActive="active">Meus Jogos</a>
+        <a mat-button routerLink="/adicionar-jogo" routerLinkActive="active">
+            <mat-icon>add</mat-icon> Adicionar Jogo
+        </a>
+    </nav>
 
     <span class="spacer"></span> 
-
-    <button mat-flat-button (click)="onLogout()" class="logout-button">
-        Sair
-    </button>
+    
+    <button mat-raised-button color="warn" (click)="logout()">Sair</button>
 </mat-toolbar>

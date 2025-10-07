@@ -1,0 +1,59 @@
+/* src/app/pages/dashboard/dashboard.scss */
+
+.dashboard-container {
+    padding: 30px;
+    color: #ffffff;
+}
+
+h1 {
+    font-size: 2.2em;
+    margin-bottom: 25px;
+    color: #ffffff;
+}
+
+.section-title {
+    font-size: 1.6em;
+    margin-top: 30px;
+    margin-bottom: 15px;
+    color: #A2FF01;
+}
+
+/* ----------------------------------------------------------------- */
+/* GRID DE ESTATÍSTICAS (Similar ao modelo)                           */
+/* ----------------------------------------------------------------- */
+.stats-grid {
+    display: grid;
+    /* 4 colunas com espaçamento */
+    grid-template-columns: repeat(4, 1fr); 
+    gap: 20px;
+    margin-bottom: 40px;
+}
+
+.stat-card {
+    background-color: #1e1e1e; /* Fundo do cartão */
+    color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+
+    mat-card-header {
+        border-bottom: 1px solid #434343; /* Linha separadora sutil */
+        padding-bottom: 10px;
+        margin-bottom: 15px;
+
+        mat-icon {
+            color: #A2FF01;
+        }
+
+        mat-card-title {
+            font-size: 1em;
+            color: #b0b0b0; /* Texto mais suave */
+        }
+    }
+
+    .stat-value {
+        font-size: 3em;
+        font-weight: bold;
+        margin: 0;
+        color: #A2FF01; /* Valor em destaque */
+    }
+}

@@ -1,115 +1,87 @@
-/* src/styles.scss - VERSÃO FINAL E COMPLETA */
+/* src/styles.scss */
 
-// 1. A regra @use DEVE ser a primeira linha para o SASS compilar
+// -----------------------------------------------------------------
+// 🚨 CORREÇÃO SASS: Importar o módulo 'color' para usar funções modernas (color.adjust)
+// -----------------------------------------------------------------
 @use "sass:color"; 
 
-/* 2. Variáveis Globais (Paleta Clean/Dark Neon) */
-$color-dark: #121212;        /* Fundo Principal e Texto no Botão Accent */
-$color-primary: #FFFFFF;     /* Branco para Texto/Links */
-$color-accent: #33FF7A;      /* Verde Vívido (Destaque Principal / Neon) */
-$color-secondary: #2C2C2C;   /* Cor de Superfície Escura (Cards/Header) */
-$color-alert: #FF5252;       /* Vermelho de Alerta (Botão Sair) */
+/* ----------------------------------------------------------------- */
+/* RESET E CORES GLOBAIS (APLICADO AO CORPO DA PÁGINA)               */
+/* ----------------------------------------------------------------- */
 
-
-/* 3. Reset e Estilos de Elementos Globais */
-html, body { 
-  height: 100%; 
+// Oculta a barra de rolagem vertical (conforme sua solicitação anterior)
+body::-webkit-scrollbar {
+    display: none;
+    width: 0; 
+    height: 0;
 }
-body { 
-  margin: 0; 
-  font-family: Roboto, "Helvetica Neue", sans-serif; 
-  background-color: $color-dark; 
-  color: $color-primary;      
-}
-
-/* Cards (Tom escuro consistente) */
-.mat-card {
-  background-color: $color-secondary !important;
-  color: $color-primary !important;
-  border-radius: 8px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+body {
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+    overflow-y: hidden;     /* Garante que o overflow vertical seja escondido */
+    
+    /* Aplica a cor de fundo principal e texto */
+    background-color: #141414; /* Fundo Preto Escuro */
+    color: #ffffff; /* Texto Branco */
+    font-family: 'Roboto', sans-serif; 
 }
 
+/* ----------------------------------------------------------------- */
+/* PADRÃO DE BOTÕES (APLICADO A TODOS OS MAT-BUTTONS)                */
+/* ----------------------------------------------------------------- */
 
-/* 4. Correção Visual dos Inputs (Padding Interno) */
-.mat-mdc-text-field-wrapper {
-  .mat-mdc-form-field-input-control {
-    padding-left: 12px !important; 
-    padding-right: 12px !important;
-  }
-}
-.mat-mdc-select-trigger {
-    padding-left: 12px !important;
-}
-textarea.mat-mdc-input {
-    padding: 12px !important;
-}
-.mat-mdc-form-field-infix {
-  padding-top: 5px; 
+// Estilo para todos os botões que não são ícones ou simples
+.mat-button, .mat-raised-button, .mat-flat-button, .mat-stroked-button {
+    text-transform: uppercase;
+    font-weight: bold;
+    border-radius: 4px;
+    transition: all 0.2s ease-in-out;
 }
 
+// PADRÃO DE BOTÃO PRIMÁRIO (Fundo Verde Neon)
+.mat-primary, .mat-flat-button.mat-primary, .mat-raised-button.mat-primary {
+    background-color: #A2FF01 !important; /* Verde Neon */
+    color: #141414 !important; /* Texto Preto */
+    box-shadow: 0 4px 6px rgba(#434343, 0.4); /* Sombra Cinza */
 
-/* 5. Estilização dos Botões ACCENT (Verde - Padrão Neon) */
-
-.mat-flat-button.mat-accent, 
-.mat-raised-button.mat-accent {
-  background-color: $color-accent !important;
-  color: $color-dark !important; 
-  font-weight: 700;
-  border-radius: 4px;
-  border: 1px solid $color-accent; 
-  transition: all 0.2s ease-in-out;
-  
-  /* BOX-SHADOW NEON FIXO: Padrão da Logo */
-  box-shadow: 0 0 5px rgba(51, 255, 122, 0.4); 
-
-  /* AJUSTE DE TAMANHO (Menor) */
-  height: 36px !important; 
-  line-height: 36px !important; 
-  padding: 0 15px !important; 
-
-  /* EFEITO DE HOVER */
-  &:hover {
-    background-color: color.adjust($color-accent, $lightness: -5%) !important; 
-    transform: translateY(-1px);
-    /* Sombra Verde Neon MAIS FORTE no hover */
-    box-shadow: 0 0 10px rgba(51, 255, 122, 0.8); 
-  }
+    &:hover {
+        /* CORREÇÃO: Usando color.adjust no lugar de darken(#A2FF01, 5%) */
+        background-color: color.adjust(#A2FF01, $lightness: -5%) !important; 
+        transform: translateY(-2px); /* Animação: Sobe 2px */
+        box-shadow: 0 6px 10px rgba(#434343, 0.6); /* Sombra mais intensa */
+    }
+    
+    &:active {
+        transform: translateY(0); /* Animação: Volta ao estado original */
+        box-shadow: 0 2px 4px rgba(#434343, 0.3);
+    }
 }
 
+/* ----------------------------------------------------------------- */
+/* ESTILIZAÇÃO PADRÃO DO MATERIAL INPUTS (CAMPOS DE FORMULÁRIO)      */
+/* ----------------------------------------------------------------- */
 
-.mat-button, .mat-icon-button {
-  transition: color 0.2s ease-in-out, background-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out, transform 0.2s ease-in-out;
-  color: $color-primary; 
-}
+// Garante que os campos de entrada tenham um estilo escuro consistente
+.mat-form-field {
+    width: 100%;
+    
+    /* Altera a cor de foco para Verde Neon */
+    &.mat-focused .mat-form-field-ripple {
+        background-color: #A2FF01 !important;
+    }
+    
+    /* Altera a cor do label/placeholder em foco */
+    &.mat-focused .mat-form-field-label {
+        color: #A2FF01 !important;
+    }
 
-.mat-icon-button:hover {
-    color: $color-accent !important;
-    background-color: rgba($color-secondary, 0.5) !important; 
-    border-radius: 50%;
-}
-
-
-/* 7. Estilização específica do Botão de Sair (Vermelho de Alerta - Neon) */
-
-.logout-button {
-  background-color: transparent !important;
-  color: $color-alert !important;
-  font-weight: 700;
-  border: 1px solid $color-alert !important; 
-  border-radius: 4px;
-  
-  /* Ajuste de tamanho, mantendo a consistência */
-  height: 36px !important; 
-  line-height: 36px !important; 
-  padding: 0 15px !important; 
-  transition: all 0.2s ease-in-out;
-  
-  /* EFEITO DE HOVER: Fundo Vermelho Sólido + Sombra Neon */
-  &:hover {
-    background-color: $color-alert !important;
-    color: $color-dark !important; 
-    transform: translateY(-1px);
-    box-shadow: 0 0 8px rgba(255, 82, 82, 0.6); 
-  }
+    /* Estilo do texto digitado */
+    .mat-input-element {
+        color: #FFFFFF;
+    }
+    
+    /* Cor da linha de sublinhado */
+    .mat-form-field-underline {
+        background-color: #434343;
+    }
 }

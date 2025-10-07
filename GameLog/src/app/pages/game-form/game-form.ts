@@ -1,96 +1,86 @@
-import { Component, OnInit } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms'; 
-import { ActivatedRoute, Router, RouterModule } from '@angular/router'; 
+// src/app/pages/game-form/game-form.ts
 
-// IMPORTS DO ANGULAR MATERIAL 
-import { MatCardModule } from '@angular/material/card';
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
+import { Router } from '@angular/router'; // Importa o Router
+import { CommonModule } from '@angular/common';
+
+// Módulos do Material (Ajuste conforme os módulos que você está usando no HTML)
+import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MatButtonModule } from '@angular/material/button';
-import { MatSliderModule } from '@angular/material/slider';
-import { MatDatepickerModule } from '@angular/material/datepicker';
-import { MatNativeDateModule } from '@angular/material/core';
+import { MatSliderModule } from '@angular/material/slider'; 
+import { MatIconModule } from '@angular/material/icon'; 
 
-// IMPORTS DE LÓGICA
-import { GameService } from '../../core/game.service';
-import { Game, GameStatus } from '../../models/game.model';
+import { GameService } from '../../core/game.service'; // Ajuste o caminho conforme sua estrutura
+import { Game } from '../../models/game.model'; // Ajuste o caminho conforme sua estrutura
+
 
 @Component({
   selector: 'app-game-form',
+  // Renomeando para GameForm, se o seu arquivo for game-form.ts
   standalone: true,
   imports: [
-    CommonModule,
-    RouterModule, 
+    CommonModule, 
     ReactiveFormsModule, 
-    MatCardModule,
-    MatInputModule,
-    MatSelectModule,
-    MatButtonModule,
-    MatSliderModule,
-    MatDatepickerModule,
-    MatNativeDateModule 
+    MatFormFieldModule, 
+    MatInputModule, 
+    MatSelectModule, 
+    MatButtonModule, 
+    MatSliderModule, 
+    MatIconModule
   ],
   templateUrl: './game-form.html',
   styleUrls: ['./game-form.scss']
 })
-export class GameForm implements OnInit {
-  
+export class GameForm implements OnInit { // <-- Classe sem o sufixo 'Component'
+
   gameForm!: FormGroup;
-  isEditMode = false;
-  gameId: string | null = null;
-  statusOptions: GameStatus[] = ['Terminado' , 'Tô jogando' , 'Quero jogar'];
 
   constructor(
     private fb: FormBuilder,
-    private route: ActivatedRoute,
-    private router: Router,
-    private gameService: GameService
-  ) {}
-
-  ngOnInit(): void {
-    this.gameId = this.route.snapshot.paramMap.get('id');
-    this.isEditMode = !!this.gameId;
-
+    private gameService: GameService,
+    private router: Router // Injeção do Router para navegação
+  ) {
     this.initForm();
-
-    if (this.isEditMode && this.gameId) {
-      const gameToEdit = this.gameService.getGameById(this.gameId);
-      if (gameToEdit) {
-        this.gameForm.patchValue(gameToEdit);
-      } else {
-        this.router.navigate(['/games']); 
-      }
-    }
   }
 
-  initForm(): void {
+  ngOnInit(): void {
+    // Se você estiver implementando a lógica de edição, ela viria aqui:
+    // Ex: const id = this.route.snapshot.paramMap.get('id');
+    // if (id) { this.loadGameForEdit(id); }
+  }
+
+  private initForm(): void {
     this.gameForm = this.fb.group({
-      id: [null],
+      id: [null], // Campo oculto para ID (necessário para salvar/editar)
       title: ['', Validators.required],
       platform: ['', Validators.required],
-      genre: ['', Validators.required],
-      status: ['To Play', Validators.required],
-      progress: [0, [Validators.min(0), Validators.max(100)]],
-      hoursPlayed: [null],
-      startDate: [null],
-      finishDate: [null],
-      rating: [null, [Validators.min(1), Validators.max(5)]],
-      coverUrl: [null],
-      notes: [null],
+      genre: [''],
+      status: ['Quero jogar', Validators.required],
+      progress: [0, Validators.min(0)],
+      hoursPlayed: [0, Validators.min(0)],
+      rating: [null],
+      hoursToBeat: [null],
+      notes: [''],
+      imageUrl: [''], // Campo adicionado no HTML
     });
   }
 
   onSubmit(): void {
     if (this.gameForm.valid) {
-      const gameData: Game = this.gameForm.value;
+      const game: Game = this.gameForm.value;
+      this.gameService.saveGame(game);
       
-      if (gameData.status === 'Tô jogando') {
-        gameData.progress = 100;
-      }
-      
-      this.gameService.saveGame(gameData);
-      this.router.navigate(['/games']); 
+      // Volta para a lista de jogos após salvar
+      this.router.navigate(['/meus-jogos']); 
     }
+  }
+
+  // MÉTODO onCancel() CORRIGIDO: Necessário para o clique no HTML
+  onCancel(): void {
+    // Navega de volta para a lista de jogos
+    this.router.navigate(['/meus-jogos']); 
   }
 }
