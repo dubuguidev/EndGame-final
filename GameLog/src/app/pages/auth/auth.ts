@@ -3,9 +3,11 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router, RouterModule } from '@angular/router';
+
+// IMPORTS REATIVOS ESSENCIAIS
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms'; 
 
-// Angular Material Imports (necessários para o template auth.html)
+// Angular Material Imports
 import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
@@ -20,13 +22,12 @@ import { AuthService } from '../../core/auth.service';
   imports: [
     CommonModule, 
     RouterModule,
-    ReactiveFormsModule, 
+    ReactiveFormsModule, // Necessário para [formGroup]
     MatCardModule, MatFormFieldModule, MatInputModule, MatButtonModule, MatCheckboxModule
   ],
   templateUrl: './auth.html',
   styleUrls: ['./auth.scss'] 
 })
-// O seu app.routes.ts está chamando c.Login, então esta classe deve ser 'Login'.
 export class Login implements OnInit { 
   
   authForm!: FormGroup; 
@@ -34,7 +35,7 @@ export class Login implements OnInit {
   constructor(
     private authService: AuthService,
     private router: Router,
-    private fb: FormBuilder // Injeta FormBuilder para criar o formulário
+    private fb: FormBuilder // Injeta FormBuilder
   ) { 
     this.createForm();
   }
@@ -44,13 +45,13 @@ export class Login implements OnInit {
 
   onSubmit(): void { 
     if (this.authForm.invalid) {
-      alert('Preencha todos os campos e aceite os termos de uso.');
+      alert('Por favor, preencha todos os campos e aceite os termos de uso.');
       return;
     }
     
     const { username, password } = this.authForm.value;
     
-    // Resolve o erro TS2554 (login() precisa de 2 argumentos)
+    // Chama o login
     const loginSuccessful = this.authService.login(username, password);
 
     if (loginSuccessful) {
@@ -68,7 +69,11 @@ export class Login implements OnInit {
     });
   }
 
+  /**
+   * MÉTODO ADICIONADO: Redireciona para a rota de cadastro.
+   * Usado no template auth.html (agora com o link "Cadastre-se aqui").
+   */
   goToRegister(): void {
-    this.router.navigate(['/register']); // Mapeado para a nova rota de cadastro
+    this.router.navigate(['/register']); 
   }
 }

@@ -4,16 +4,19 @@ import { Routes } from '@angular/router';
 import { AuthGuard } from './core/auth.guard'; 
 
 export const routes: Routes = [
-  // Rota de Login/Autenticação (Corrigida de c.Auth para c.Login)
+  
+  // 1. ROTAS NÃO PROTEGIDAS (Acessíveis a todos)
+  
+  // Rota de Login (Componente Login exportado de auth.ts)
   {
     path: 'login',
     loadComponent: () => 
       import('./pages/auth/auth') 
-      .then(c => c.Login), // <--- CORREÇÃO
+      .then(c => c.Login), // <-- Componente Login de auth.ts
     title: 'Login - EndGame'
   },
   
-  // Rota de Cadastro (NOVA)
+  // Rota de Cadastro (Componente Register exportado de register.ts)
   {
     path: 'register',
     loadComponent: () => 
@@ -22,43 +25,58 @@ export const routes: Routes = [
     title: 'Cadastro - EndGame'
   },
   
-  // Rota Principal
-  {
-    path: '',
-    redirectTo: 'dashboard',
-    pathMatch: 'full'
-  },
   
-  // Rotas Protegidas (Dashboard e Jogos)
+  // 2. ROTA PROTETIDA PRINCIPAL
+  // Toda rota que cair aqui primeiro passa pelo AuthGuard.
   {
-    path: 'dashboard',
-    loadComponent: () => import('./pages/dashboard/dashboard')
-      .then(c => c.Dashboard),
-    canActivate: [AuthGuard],
-    title: 'GameLog - Dashboard'
-  },
-  {
-    path: 'games',
-    canActivate: [AuthGuard],
+    path: '', // Rota raiz agora é a rota protegida
+    canActivate: [AuthGuard], // Aplica o Guard
     children: [
+      
+      // Sub-rota: Redireciona a raiz ('/') para o Dashboard, APENAS SE ESTIVER LOGADO.
       {
         path: '', 
-        loadComponent: () => import('./pages/game-list/game-list')
-          .then(c => c.GameList),
-        title: 'Meus Jogos'
+        redirectTo: 'dashboard',
+        pathMatch: 'full'
       },
+      
+      // Sub-rota: Dashboard
       {
-        path: 'new', 
-        loadComponent: () => import('./pages/game-form/game-form')
-          .then(c => c.GameForm)
+        path: 'dashboard',
+        loadComponent: () => import('./pages/dashboard/dashboard')
+          .then(c => c.Dashboard),
+        title: 'GameLog - Dashboard'
+      },
+      
+      // Sub-rota: Gerenciamento de Jogos
+      {
+        path: 'games',
+        children: [
+          {
+            path: '', 
+            loadComponent: () => import('./pages/game-list/game-list')
+              .then(c => c.GameList),
+            title: 'Meus Jogos'
+          },
+          {
+            path: 'new', 
+            loadComponent: () => import('./pages/game-form/game-form')
+              .then(c => c.GameForm)
+          },
+          // Rota de Detalhes
+          {
+            path: ':id',
+            loadComponent: () => import('./pages/game-details/game-details')
+              .then(c => c.GameDetails)
+          }
+        ]
       }
     ]
   },
   
-  // Rota Wildcard (404)
+  // 3. Rota Wildcard (404)
   {
     path: '**',
-    redirectTo: 'dashboard'
-    // Você pode criar um componente 404/NotFound aqui.
+    redirectTo: 'login' // Manda qualquer rota desconhecida para o login
   }
 ];

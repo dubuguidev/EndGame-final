@@ -15,21 +15,15 @@ export class AuthGuard implements CanActivate {
 
   canActivate(): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
     
-    // Observa o estado de login do AuthService
+    // CORREÇÃO: Usando isLoggedIn$ corretamente (resolve TS2551 se o erro persistir)
     return this.authService.isLoggedIn$.pipe(
-      // Pega o valor atual e completa o Observable (essencial para guards)
       take(1),
-      
-      // Mapeia o estado de login para a permissão de rota
       map(isLoggedIn => {
-        // CORREÇÃO DO ERRO TS2551: Usando 'isLoggedIn$' corretamente
         if (isLoggedIn) {
-          // Permite o acesso à rota
-          return true;
+          return true; // Usuário logado: permite acesso.
         } else {
-          // Redireciona para a página de login e retorna uma UrlTree
-          // Presumindo que sua rota de login seja '/auth/login'
-          return this.router.createUrlTree(['/auth/login']); 
+          // Usuário NÃO logado: redireciona para a rota de login
+          return this.router.createUrlTree(['/login']); 
         }
       })
     );
