@@ -22,7 +22,7 @@ import { AuthService } from '../../core/auth.service';
     ReactiveFormsModule, 
     MatCardModule, MatFormFieldModule, MatInputModule, MatButtonModule
   ],
-  templateUrl: './register.html', // Você precisará criar este template
+  templateUrl: './register.html', // <--- Garanta que este arquivo existe!
   styleUrls: ['./auth.scss'] 
 })
 export class Register implements OnInit { 
@@ -48,10 +48,11 @@ export class Register implements OnInit {
     
     const { username, password } = this.registerForm.value;
     
+    // Tenta registrar o usuário (o AuthService deve salvar no array/localStorage)
     const registrationSuccessful = this.authService.register(username, password);
 
     if (registrationSuccessful) {
-      alert('Cadastro realizado com sucesso! Você pode fazer login agora.');
+      alert('Cadastro realizado com sucesso! Faça login agora.');
       this.router.navigate(['/login']); // Redireciona para o login
     } else {
       alert('Falha no cadastro. O usuário pode já estar cadastrado.');
@@ -62,10 +63,14 @@ export class Register implements OnInit {
     this.registerForm = this.fb.group({
       username: ['', Validators.required],
       password: ['', [Validators.required, Validators.minLength(6)]],
-      // Adicione a confirmação de senha e validação personalizada se desejar
+      confirmPassword: ['', Validators.required] // Adicionado para demonstração
     });
   }
-  
+
+  /**
+   * Método para voltar à tela de Login. 
+   * Usado no template register.html.
+   */
   goToLogin(): void {
     this.router.navigate(['/login']);
   }

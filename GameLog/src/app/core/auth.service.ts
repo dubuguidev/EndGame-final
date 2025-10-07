@@ -1,12 +1,12 @@
 // src/app/core/auth.service.ts
 
 import { Injectable } from '@angular/core';
-import { Observable, BehaviorSubject } from 'rxjs'; // Necessário para a propriedade isLoggedIn$
+import { BehaviorSubject, Observable } from 'rxjs';
 
-// Interface para definir a estrutura de um usuário
-interface UserCredentials {
+// Interface simples para o usuário, se não existir
+interface User {
   username: string;
-  passwordHash: string;
+  password: string;
 }
 
 @Injectable({
@@ -14,76 +14,83 @@ interface UserCredentials {
 })
 export class AuthService {
   
-  // 1. Simula um "banco de dados" local para usuários cadastrados
-  // NOTA: Em produção, isto viria de um Backend e usaria hashes de senha.
-  private users: UserCredentials[] = [];
-  
-  // 2. Controla o estado de login para que o header (app.component.ts) possa reagir
-  private isLoggedInSubject = new BehaviorSubject<boolean>(this.hasToken());
-  isLoggedIn$: Observable<boolean> = this.isLoggedInSubject.asObservable();
-  
-  constructor() { 
-    // Garante que o estado inicial do Subject reflita o localStorage
-    // Caso o usuário recarregue a página
-    this.isLoggedInSubject.next(this.hasToken());
-  }
-  
-  // ----------------------------------------------------
-  // MÉTODOS DE AUTENTICAÇÃO
-  // ----------------------------------------------------
+  // Chave para armazenar o estado no Local Storage
+  private AUTH_KEY = 'isAuthenticated';
+  private USER_DB_KEY = 'userDatabase';
 
-  /**
-   * Verifica se as credenciais já existem e cadastra o novo usuário.
-   */
+  // Gerencia o estado de login de forma reativa
+  private isLoggedInSubject: BehaviorSubject<boolean>;
+  public isLoggedIn$: Observable<boolean>;
+
+  // Armazenamento local simulado de usuários
+  private userDatabase: User[] = [];
+
+  constructor() {
+    // 1. Inicializa o estado lendo do Local Storage
+    const initialAuthStatus = localStorage.getItem(this.AUTH_KEY) === 'true';
+    this.isLoggedInSubject = new BehaviorSubject<boolean>(initialAuthStatus);
+    this.isLoggedIn$ = this.isLoggedInSubject.asObservable();
+    
+    // 2. Carrega o banco de dados de usuários do Local Storage
+    const storedUsers = localStorage.getItem(this.USER_DB_KEY);
+    if (storedUsers) {
+      this.userDatabase = JSON.parse(storedUsers);
+    }
+  }
+
+  // ======================================================
+  // MÉTODO DE CADASTRO (Implementação do register.ts)
+  // ======================================================
+
   register(username: string, password: string): boolean {
     // 1. Verifica se o usuário já existe
-    if (this.users.find(u => u.username === username)) {
-      console.error('ERRO: Usuário já cadastrado!');
+    if (this.userDatabase.find(u => u.username === username)) {
+      console.error('Usuário já existe.');
       return false;
     }
     
-    // 2. Cadastra o novo usuário (Simulação)
-    this.users.push({ username, passwordHash: password });
-    console.log(`Usuário registrado: ${username}. Total de usuários: ${this.users.length}`);
+    // 2. Adiciona o novo usuário
+    const newUser: User = { username, password };
+    this.userDatabase.push(newUser);
+    
+    // 3. Salva no Local Storage
+    localStorage.setItem(this.USER_DB_KEY, JSON.stringify(this.userDatabase));
+    
+    console.log(`Usuário ${username} registrado com sucesso.`);
     return true;
   }
+  
+  // ======================================================
+  // MÉTODO DE LOGIN (Implementação do auth.ts)
+  // ======================================================
 
-  /**
-   * Tenta fazer login, verificando se o usuário existe na lista e se a senha confere.
-   */
   login(username: string, password: string): boolean {
-    // 1. Busca o usuário cadastrado com o username e senha
-    const user = this.users.find(
-      u => u.username === username && u.passwordHash === password
-    );
-    
+    // 1. Verifica as credenciais no banco de dados
+    const user = this.userDatabase.find(u => u.username === username && u.password === password);
+
     if (user) {
-      // 2. Login Bem-sucedido: Armazena o token e atualiza o estado
-      localStorage.setItem('isAuthenticated', 'true');
-      this.isLoggedInSubject.next(true);
-      console.log('Login bem-sucedido!');
+      // 2. Define o estado de login como verdadeiro
+      localStorage.setItem(this.AUTH_KEY, 'true');
+      this.isLoggedInSubject.next(true); 
+      console.log(`Login bem-sucedido para ${username}`);
       return true;
     } else {
-      // 3. Login Falhou: Credenciais não encontradas ou incorretas
-      console.error('ERRO: Credenciais inválidas ou usuário não cadastrado.');
+      console.error('Credenciais inválidas ou usuário não encontrado.');
       return false;
     }
   }
 
-  /**
-   * Realiza o logout e limpa o status.
-   */
+  // ======================================================
+  // MÉTODO DE LOGOUT
+  // ======================================================
+
   logout(): void {
-    localStorage.removeItem('isAuthenticated');
+    // 1. Limpa o estado no Local Storage e no Subject
+    localStorage.setItem(this.AUTH_KEY, 'false');
     this.isLoggedInSubject.next(false);
-    console.log('Logout realizado.');
-    // Você deve adicionar aqui a navegação para a página de login.
+    
+    // 2. Redireciona para a tela de login
+    console.log('Logout realizado. Redirecionando para /login.');
   }
 
-  /**
-   * Função auxiliar para verificar o token no localStorage.
-   */
-  private hasToken(): boolean {
-    return localStorage.getItem('isAuthenticated') === 'true';
-  }
 }
