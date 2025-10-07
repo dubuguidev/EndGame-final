@@ -1,19 +1,26 @@
-<h2>Biblioteca de Jogos</h2>
+<div class="game-library-section">
+    <h2>Biblioteca de Jogos</h2>
 
-<div class="game-carousel">
-  <mat-card *ngFor="let game of libraryGames" class="game-card">
-    <img mat-card-image [src]="game.imageUrl" [alt]="game.title">
-    <mat-card-header>
-      <mat-card-title>{{ game.title }}</mat-card-title>
-      <mat-card-subtitle>{{ game.platform }}</mat-card-subtitle>
-    </mat-card-header>
-    <mat-card-content>
-      <p class="hours">Tempo: {{ game.hoursToBeat }}h</p>
-    </mat-card-content>
-    <mat-card-actions>
-      <button mat-flat-button color="accent" (click)="addGameToUserList(game.id)">
-        Adicionar à minha lista
-      </button>
-    </mat-card-actions>
-  </mat-card>
+    <div class="game-carousel">
+        <mat-card *ngFor="let game of libraryGames$ | async" class="game-card">
+            
+            <img mat-card-image [src]="game.imageUrl" [alt]="game.title"> 
+            
+            <mat-card-header>
+                <mat-card-title>{{ game.title }}</mat-card-title>
+                <mat-card-subtitle>{{ game.platform }}</mat-card-subtitle>
+            </mat-card-header>
+
+            <mat-card-content>
+                <p class="synopsis">{{ game.notes | slice:0:100 }}...</p>
+                <p class="hours">Tempo Estimado: {{ game.hoursToBeat }} h</p>
+                </mat-card-content>
+            
+            <mat-card-actions>
+                <button mat-flat-button color="accent" (click)="addGameToUserList(game.id)">
+                    Adicionar à minha lista
+                </button>
+            </mat-card-actions>
+        </mat-card>
+    </div>
 </div>

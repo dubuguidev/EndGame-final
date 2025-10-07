@@ -1,38 +1,45 @@
-// src/app/pages/game-library/game-library.component.ts
+// src/app/pages/game-library/game-library.ts
 
 import { Component, OnInit } from '@angular/core';
-import { CommonModule } from '@angular/common'; // <-- ESSENCIAL PARA *ngFor e pipe slice
-import { GameLibraryService } from '../../core/game-library.service';
-import { Game } from '../../models/game.model'; // Seu modelo correto
-// Importações do Angular Material
-import { MatCardModule } from '@angular/material/card'; 
+import { CommonModule } from '@angular/common';
+import { Observable } from 'rxjs';
+
+// Módulos do Material
+import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button'; 
+import { MatIconModule } from '@angular/material/icon'; 
+import { MatChipsModule } from '@angular/material/chips'; 
+
+import { Game } from '../../models/game.model';
+import { GameService } from '../../core/game.service'; // Importa o serviço com a lista final
 
 @Component({
-  selector: 'app-game-library',
+  selector: 'app-game-library', 
   standalone: true,
-  // NOVO: Adicione todos os módulos do Material usados no template
   imports: [
-    CommonModule, 
-    MatCardModule, 
-    MatButtonModule 
-    // Se você estiver usando mat-icon para o botão, adicione MatIconModule
-  ], 
-  templateUrl: './game-library.html',
-  styleUrl: './game-library.scss'
+    CommonModule,
+    MatCardModule,
+    MatButtonModule,
+    MatIconModule,
+    MatChipsModule
+  ],
+  // CORREÇÃO: Remove o './' para resolver o erro de caminho do VS Code
+  templateUrl: 'game-library.html', 
+  styleUrls: ['game-library.scss'] 
 })
-export class GameLibraryComponent implements OnInit {
+export class GameLibrary implements OnInit {
   
-  libraryGames: Game[] = [];
-  
-  constructor(private gameLibraryService: GameLibraryService) { }
+  libraryGames$!: Observable<Game[]>; 
+
+  // Injeta o GameService, que agora tem a lista completa e corrigida.
+  constructor(private gameService: GameService) { }
 
   ngOnInit(): void {
-    this.libraryGames = this.gameLibraryService.getGames();
+    // Obtém a lista de jogos do GameService (o unificado)
+    this.libraryGames$ = this.gameService.getGames(); 
   }
-
+  
   addGameToUserList(gameId: string): void {
-    // Lógica para adicionar o jogo
-    console.log(`Jogo ${gameId} adicionado à lista do usuário.`);
+      alert(`Jogo ID ${gameId} adicionado à sua lista!`);
   }
 }

@@ -1,52 +1,42 @@
-import { Component } from '@angular/core';
+// src/app/pages/dashboard/dashboard.ts (Corrigido para usar o GameService)
+
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { MatCardModule } from '@angular/material/card';
-import { MatIconModule } from '@angular/material/icon';
 import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { GameLibrary } from '../game-library/game-library'; // OK
+import { GameService } from '../../core/game.service'; 
+import { MatCardModule } from '@angular/material/card';
+import { MatIconModule } from '@angular/material/icon'; // Necessário para os ícones
 
-// CORREÇÃO DOS CAMINHOS RELATIVOS
-import { GameService } from '../../core/game.service';
-import { Game, GameStatus } from '../../models/game.model';
-
-interface Stats {
+// Interface para as estatísticas
+interface GameStats {
   total: number;
   playing: number;
   toPlay: number;
   played: number;
-  totalHours: number;
 }
 
 @Component({
-  selector: 'app-dashboard', 
+  selector: 'app-dashboard',
   standalone: true,
-  imports: [CommonModule, MatCardModule, MatIconModule],
+  imports: [
+    CommonModule,
+    GameLibrary, // Módulo do Carrossel
+    MatCardModule, // Módulos para as estatísticas
+    MatIconModule
+  ],
   templateUrl: './dashboard.html',
   styleUrls: ['./dashboard.scss']
 })
-
-export class Dashboard { 
+export class Dashboard implements OnInit {
   
-  // Observable que mapeia a lista de jogos para as estatísticas
-  stats$: Observable<Stats>;
+  stats$!: Observable<GameStats>; 
 
-  constructor(private gameService: GameService) {
-    this.stats$ = this.gameService.games$.pipe(
-      map(games => this.calculateStats(games as Game[]))
-    );
-  }
+  constructor(private gameService: GameService) { }
 
-  private calculateStats(games: Game[]): Stats {
-    const totalHours = games
-      .map(g => g.hoursPlayed || 0)
-      .reduce((sum, hours) => sum + hours, 0);
-
-    return {
-      total: games.length,
-      playing: games.filter(g => g.status === 'Tô jogando').length,
-      toPlay: games.filter(g => g.status === 'Quero jogar').length,
-      played: games.filter(g => g.status === 'Terminado').length,
-      totalHours: totalHours
-    };
+  ngOnInit(): void {
+    // Implemente o método de estatísticas no GameService e chame ele aqui
+    // Se você não tiver um método 'getStats()', a linha abaixo pode ser comentada
+    // this.stats$ = this.gameService.getStats(); 
   }
 }

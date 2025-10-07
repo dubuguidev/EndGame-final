@@ -1,27 +1,67 @@
-/* src/app/pages/game-library/game-library.component.scss */
+// src/app/pages/game-library/game-library.scss
+
+.game-library-section {
+    padding: 20px 0;
+}
 
 .game-carousel {
-  display: flex;
-  overflow-x: auto; /* Habilita o scroll horizontal */
-  padding: 20px 0;
-  gap: 20px; /* Espaço entre os cards */
-  
-  /* Esconde a barra de rolagem padrão (opcional, para um visual mais limpo) */
-  &::-webkit-scrollbar {
-    display: none; 
-  }
-
-  .game-card {
-    min-width: 300px; /* Largura fixa para cada card no carrossel */
-    max-width: 300px;
-    height: auto;
+    /* 1. Habilita o scroll horizontal e define o layout flexível */
     display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-  }
-  
-  mat-card-image {
-    height: 180px;
+    overflow-x: scroll; /* ESSENCIAL: Permite a rolagem na horizontal */
+    overflow-y: hidden; /* Opcional: Garante que não haja rolagem vertical */
+    gap: 20px; /* Espaço entre os cartões */
+    padding-bottom: 20px; /* Espaço para a barra de rolagem */
+    
+    /* Opcional: Esconde a barra de rolagem (WebKit - Chrome/Safari) */
+    &::-webkit-scrollbar {
+        display: none;
+    }
+    /* Opcional: Esconde a barra de rolagem (IE/Edge) */
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+}
+
+.game-card {
+    /* 2. Garante que os cartões não quebrem a linha */
+    /* flex: 0 0 220px; -> Não cresce, não encolhe, largura de 220px */
+    flex-shrink: 0; 
+    width: 220px; 
+    
+    /* Estilo do Material Card */
+    background-color: #1e1e1e; 
+    color: #ffffff; 
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+    
+    /* Removendo padding padrão do card content para usar o padding interno */
+    mat-card-content {
+        padding: 0 16px 16px; 
+    }
+    
+    /* Estilo específico para os elementos internos do cartão */
+    .synopsis {
+        font-size: 0.9em;
+        color: #b0b0b0;
+        margin-top: 5px;
+    }
+    .hours {
+        font-weight: bold;
+        color: #2ecc71; /* Cor de destaque (verde) */
+        margin-top: 10px;
+    }
+}
+
+/* 3. Estiliza a imagem da capa */
+img.mat-card-image {
+    /* Define uma altura fixa para que as imagens tenham um tamanho consistente */
+    height: 300px; 
+    /* Garante que a imagem cubra o espaço sem distorção */
     object-fit: cover;
-  }
+    /* Remove a margem padrão do mat-card-image para ficar ajustado */
+    margin: 0;
+}
+
+.auth-actions {
+    display: flex;
+    justify-content: flex-end;
 }
