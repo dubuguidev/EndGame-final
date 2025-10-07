@@ -1,5 +1,3 @@
-// src/app/pages/game-details/game-details.component.ts
-
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
@@ -25,12 +23,11 @@ import { Game } from '../../models/game.model'; // Caminho relativo
     MatIconModule,
     MatProgressBarModule
   ],
-  // Nota: Verifique o nome da classe exportada no seu arquivo! 
-  // Se for 'GameDetalhes', você deve mudar a linha de exportação.
+
   templateUrl: './game-details.html', 
   styleUrls: ['./game-details.scss']
 })
-export class GameDetails implements OnInit { // <-- USANDO O NOME DA SUA CLASSE CORRIGIDA
+export class GameDetails implements OnInit {
 
   game: Game | undefined;
 

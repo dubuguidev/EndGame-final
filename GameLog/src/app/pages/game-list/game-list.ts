@@ -1,5 +1,3 @@
-// src/app/pages/game-list/game-list.ts
-
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router'; 

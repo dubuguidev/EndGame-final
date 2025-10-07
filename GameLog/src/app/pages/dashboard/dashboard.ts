@@ -1,4 +1,4 @@
-import { Component } from '@angular/core'; // Removido OnInit, pois não é estritamente necessário
+import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
@@ -18,11 +18,10 @@ interface Stats {
 }
 
 @Component({
-  // Nota: Certifique-se que o seu seletor não inclui .component
   selector: 'app-dashboard', 
   standalone: true,
   imports: [CommonModule, MatCardModule, MatIconModule],
-  templateUrl: './dashboard.html', // Assumindo que o template é dashboard.html
+  templateUrl: './dashboard.html',
   styleUrls: ['./dashboard.scss']
 })
 

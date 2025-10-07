@@ -1,5 +1,3 @@
-// src/app/models/game.model.ts
-
 export type GameStatus = 'Played' | 'Playing' | 'To Play';
 
 export interface Game {

@@ -1,5 +1,3 @@
-// src/app/app.ts (Versão Completa e Final)
-
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { CommonModule } from '@angular/common'; // <--- ONDE ESTÃO O *ngIf E | async
