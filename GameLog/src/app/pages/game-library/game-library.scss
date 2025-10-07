@@ -1,0 +1,27 @@
+/* src/app/pages/game-library/game-library.component.scss */
+
+.game-carousel {
+  display: flex;
+  overflow-x: auto; /* Habilita o scroll horizontal */
+  padding: 20px 0;
+  gap: 20px; /* Espaço entre os cards */
+  
+  /* Esconde a barra de rolagem padrão (opcional, para um visual mais limpo) */
+  &::-webkit-scrollbar {
+    display: none; 
+  }
+
+  .game-card {
+    min-width: 300px; /* Largura fixa para cada card no carrossel */
+    max-width: 300px;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  
+  mat-card-image {
+    height: 180px;
+    object-fit: cover;
+  }
+}

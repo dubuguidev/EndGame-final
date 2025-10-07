@@ -13,4 +13,6 @@ export interface Game {
   rating?: number; // 1 a 5 estrelas
   coverUrl?: string;
   notes?: string;
+  hoursToBeat: number; // Horas necessárias para zerar
+  imageUrl: string; // URL da imagem/foto
 }
