@@ -1,0 +1,54 @@
+$color-primary: #1F1F1F;
+$color-accent: #33FF7A;
+$color-background: #F4F4F4;
+
+.auth-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: calc(100vh - 64px); /* Centraliza na tela, tirando o espaço do Header (se estiver visível por um momento) */
+  padding-top: 50px; /* Um pequeno ajuste visual */
+
+  .login-card {
+    width: 100%;
+    max-width: 400px; /* Largura máxima para o formulário */
+    padding: 30px;
+    
+    mat-card-title {
+        color: $color-accent; /* Título em Verde */
+        font-weight: 700;
+        text-align: center;
+        margin-bottom: 10px;
+    }
+
+    mat-card-subtitle {
+        text-align: center;
+        margin-bottom: 30px;
+    }
+
+    .full-width {
+      width: 100%;
+      margin-bottom: 20px;
+    }
+    
+    /* Pré-Configuração de Espaço para Ícone de Login */
+    .login-icon-placeholder {
+        display: block;
+        text-align: center;
+        margin-bottom: 20px;
+        
+        /* Icone-boladex*/
+        mat-icon {
+            font-size: 60px;
+            height: 60px;
+            width: 60px;
+            color: $color-accent;
+        }
+    }
+    
+    /* Estilo do Botão de Login (Verde/Preto) */
+    .login-button {
+        margin-top: 20px;
+    }
+  }
+}

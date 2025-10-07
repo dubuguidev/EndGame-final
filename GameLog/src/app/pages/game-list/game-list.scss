@@ -1,57 +1,63 @@
 /* src/app/pages/game-list/game-list.scss */
 
+$color-accent: #33FF7A;
+$color-primary: #FFFFFF;
+$color-secondary: #2C2C2C;
+
 .list-container {
-  padding: 24px;
-}
+    padding: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
 
-h1 {
-  margin-bottom: 20px;
-  color: #3f51b5; /* Cor primária do Material */
-}
-
-/* Container de Cards (Grid) */
-.game-cards-container {
-  display: grid;
-  // Layout adaptativo: 3 colunas em telas grandes, 1 em telas pequenas
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  gap: 20px;
-  padding: 20px 0; /* Espaçamento interno */
-}
-
-.game-card {
-  cursor: pointer;
-  transition: transform 0.2s, box-shadow 0.2s;
-
-  &:hover {
-    transform: translateY(-4px); /* Efeito de elevação */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  }
-  
-  mat-card-header {
-    padding-bottom: 0;
-  }
-  
-  mat-card-title {
-    font-size: 1.2em;
-    font-weight: 500;
-  }
-  
-  mat-card-subtitle {
-    color: #777;
-  }
-  
-  mat-card-content {
-    p {
-      margin: 8px 0;
+    // Estilização das Tabs (Status: Playing, To Play, Played)
+    .mat-tab-group {
+        margin-bottom: 20px;
+        
+        // Cor do indicador e do label ativo em Verde
+        .mat-tab-label-active {
+            color: $color-accent !important;
+            font-weight: 500;
+        }
+        .mat-ink-bar {
+            background-color: $color-accent !important;
+        }
     }
-  }
-}
 
-/* Estilo para a mensagem de lista vazia */
-.no-games-msg {
-  grid-column: 1 / -1; /* Ocupa todas as colunas do grid */
-  text-align: center;
-  padding: 40px;
-  color: #777;
-  font-style: italic;
+    // Container dos Cards (Grid)
+    .game-cards-container {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+        gap: 20px;
+    }
+
+    // Card Individual do Jogo
+    .mat-card {
+        cursor: pointer;
+        transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out, border 0.2s ease-in-out;
+        border: 1px solid transparent; // Borda inicial transparente
+
+        // Efeito de HOVER nas Cards
+        &:hover {
+            transform: translateY(-3px); // Leve ascensão
+            box-shadow: 0 8px 15px rgba(51, 255, 122, 0.2); // Sombra verde no hover
+            border: 1px solid $color-accent; // Borda sutil verde
+        }
+
+        mat-card-subtitle {
+            color: $color-accent; // Plataforma em Verde
+            font-weight: 500;
+            margin-top: 5px;
+        }
+
+        // Cor da Barra de Progresso
+        .mat-progress-bar-fill::after {
+            background-color: $color-accent; 
+        }
+    }
+    
+    .no-games-msg {
+        text-align: center;
+        margin-top: 50px;
+        color: #999;
+    }
 }

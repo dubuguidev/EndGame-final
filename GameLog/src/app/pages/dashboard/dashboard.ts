@@ -43,9 +43,9 @@ export class Dashboard {
 
     return {
       total: games.length,
-      playing: games.filter(g => g.status === 'Playing').length,
-      toPlay: games.filter(g => g.status === 'To Play').length,
-      played: games.filter(g => g.status === 'Played').length,
+      playing: games.filter(g => g.status === 'Tô jogando').length,
+      toPlay: games.filter(g => g.status === 'Quero jogar').length,
+      played: games.filter(g => g.status === 'Terminado').length,
       totalHours: totalHours
     };
   }

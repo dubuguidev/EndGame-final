@@ -1,39 +1,115 @@
+/* src/styles.scss - VERSÃO FINAL E COMPLETA */
 
-// Include theming for Angular Material with `mat.theme()`.
-// This Sass mixin will define CSS variables that are used for styling Angular Material
-// components according to the Material 3 design spec.
-// Learn more about theming and how to use it for your application's
-// custom components at https://material.angular.dev/guide/theming
-@use '@angular/material' as mat;
+// 1. A regra @use DEVE ser a primeira linha para o SASS compilar
+@use "sass:color"; 
 
-html {
-  @include mat.theme((
-    color: (
-      primary: mat.$cyan-palette,
-      tertiary: mat.$orange-palette,
-    ),
-    typography: Roboto,
-    density: 0,
-  ));
+/* 2. Variáveis Globais (Paleta Clean/Dark Neon) */
+$color-dark: #121212;        /* Fundo Principal e Texto no Botão Accent */
+$color-primary: #FFFFFF;     /* Branco para Texto/Links */
+$color-accent: #33FF7A;      /* Verde Vívido (Destaque Principal / Neon) */
+$color-secondary: #2C2C2C;   /* Cor de Superfície Escura (Cards/Header) */
+$color-alert: #FF5252;       /* Vermelho de Alerta (Botão Sair) */
+
+
+/* 3. Reset e Estilos de Elementos Globais */
+html, body { 
+  height: 100%; 
+}
+body { 
+  margin: 0; 
+  font-family: Roboto, "Helvetica Neue", sans-serif; 
+  background-color: $color-dark; 
+  color: $color-primary;      
 }
 
-body {
-  // Default the application to a light color theme. This can be changed to
-  // `dark` to enable the dark color theme, or to `light dark` to defer to the
-  // user's system settings.
-  color-scheme: light;
-
-  // Set a default background, font and text colors for the application using
-  // Angular Material's system-level CSS variables. Learn more about these
-  // variables at https://material.angular.dev/guide/system-variables
-  background-color: var(--mat-sys-surface);
-  color: var(--mat-sys-on-surface);
-  font: var(--mat-sys-body-medium);
-
-  // Reset the user agent margin.
-  margin: 0;
+/* Cards (Tom escuro consistente) */
+.mat-card {
+  background-color: $color-secondary !important;
+  color: $color-primary !important;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
 }
-/* You can add global styles to this file, and also import other style files */
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+/* 4. Correção Visual dos Inputs (Padding Interno) */
+.mat-mdc-text-field-wrapper {
+  .mat-mdc-form-field-input-control {
+    padding-left: 12px !important; 
+    padding-right: 12px !important;
+  }
+}
+.mat-mdc-select-trigger {
+    padding-left: 12px !important;
+}
+textarea.mat-mdc-input {
+    padding: 12px !important;
+}
+.mat-mdc-form-field-infix {
+  padding-top: 5px; 
+}
+
+
+/* 5. Estilização dos Botões ACCENT (Verde - Padrão Neon) */
+
+.mat-flat-button.mat-accent, 
+.mat-raised-button.mat-accent {
+  background-color: $color-accent !important;
+  color: $color-dark !important; 
+  font-weight: 700;
+  border-radius: 4px;
+  border: 1px solid $color-accent; 
+  transition: all 0.2s ease-in-out;
+  
+  /* BOX-SHADOW NEON FIXO: Padrão da Logo */
+  box-shadow: 0 0 5px rgba(51, 255, 122, 0.4); 
+
+  /* AJUSTE DE TAMANHO (Menor) */
+  height: 36px !important; 
+  line-height: 36px !important; 
+  padding: 0 15px !important; 
+
+  /* EFEITO DE HOVER */
+  &:hover {
+    background-color: color.adjust($color-accent, $lightness: -5%) !important; 
+    transform: translateY(-1px);
+    /* Sombra Verde Neon MAIS FORTE no hover */
+    box-shadow: 0 0 10px rgba(51, 255, 122, 0.8); 
+  }
+}
+
+
+.mat-button, .mat-icon-button {
+  transition: color 0.2s ease-in-out, background-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out, transform 0.2s ease-in-out;
+  color: $color-primary; 
+}
+
+.mat-icon-button:hover {
+    color: $color-accent !important;
+    background-color: rgba($color-secondary, 0.5) !important; 
+    border-radius: 50%;
+}
+
+
+/* 7. Estilização específica do Botão de Sair (Vermelho de Alerta - Neon) */
+
+.logout-button {
+  background-color: transparent !important;
+  color: $color-alert !important;
+  font-weight: 700;
+  border: 1px solid $color-alert !important; 
+  border-radius: 4px;
+  
+  /* Ajuste de tamanho, mantendo a consistência */
+  height: 36px !important; 
+  line-height: 36px !important; 
+  padding: 0 15px !important; 
+  transition: all 0.2s ease-in-out;
+  
+  /* EFEITO DE HOVER: Fundo Vermelho Sólido + Sombra Neon */
+  &:hover {
+    background-color: $color-alert !important;
+    color: $color-dark !important; 
+    transform: translateY(-1px);
+    box-shadow: 0 0 8px rgba(255, 82, 82, 0.6); 
+  }
+}

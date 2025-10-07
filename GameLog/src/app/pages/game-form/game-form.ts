@@ -39,7 +39,7 @@ export class GameForm implements OnInit {
   gameForm!: FormGroup;
   isEditMode = false;
   gameId: string | null = null;
-  statusOptions: GameStatus[] = ['Playing', 'To Play', 'Played'];
+  statusOptions: GameStatus[] = ['Terminado' , 'Tô jogando' , 'Quero jogar'];
 
   constructor(
     private fb: FormBuilder,
@@ -85,7 +85,7 @@ export class GameForm implements OnInit {
     if (this.gameForm.valid) {
       const gameData: Game = this.gameForm.value;
       
-      if (gameData.status === 'Played') {
+      if (gameData.status === 'Tô jogando') {
         gameData.progress = 100;
       }
       

@@ -8,9 +8,9 @@ import { Game } from '../models/game.model';
 export class GameService {
   private games: Game[] = [
     // Dados iniciais de exemplo
-    { id: '1', title: 'Cyberpunk 2077', platform: 'PC', genre: 'RPG', status: 'Playing', progress: 45, hoursPlayed: 80 },
-    { id: '2', title: 'The Legend of Zelda: TOTK', platform: 'Switch', genre: 'Adventure', status: 'Played', progress: 100, rating: 5 },
-    { id: '3', title: 'Elden Ring', platform: 'PS5', genre: 'Soulslike', status: 'To Play', progress: 0 },
+    { id: '1', title: 'Cyberpunk 2077', platform: 'PC', genre: 'RPG', status: 'Tô jogando', progress: 45, hoursPlayed: 80 },
+    { id: '2', title: 'The Legend of Zelda: TOTK', platform: 'Switch', genre: 'Adventure', status: 'Terminado', progress: 100, rating: 5 },
+    { id: '3', title: 'Elden Ring', platform: 'PS5', genre: 'Soulslike', status: 'Quero jogar', progress: 0 },
   ];
 
   private gamesSubject = new BehaviorSubject<Game[]>(this.games);

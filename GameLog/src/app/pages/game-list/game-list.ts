@@ -34,7 +34,7 @@ export class GameList {
   games$: Observable<Game[]>;
 
   // Status para navegação por abas
-  statuses: GameStatus[] = ['Playing', 'To Play', 'Played'];
+  statuses: GameStatus[] = ['Terminado' , 'Tô jogando' , 'Quero jogar'];
 
   // O GameService é injetado.
   constructor(private gameService: GameService) {

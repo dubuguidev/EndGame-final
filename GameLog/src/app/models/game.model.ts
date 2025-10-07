@@ -1,4 +1,4 @@
-export type GameStatus = 'Played' | 'Playing' | 'To Play';
+export type GameStatus = 'Terminado' | 'Tô jogando' | 'Quero jogar';
 
 export interface Game {
   id: string; // UUID ou similar
