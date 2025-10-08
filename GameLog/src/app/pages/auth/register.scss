@@ -85,14 +85,23 @@ mat-form-field.full-width {
   }
 }
 
+mat-card-actions {
+    display: flex; /* Adiciona Flexbox ao pai do botão */
+    justify-content: center; /* Centraliza o botão */
+    
+    /* Zera o padding lateral que o Material adiciona por padrão */
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+    
+    width: 100%; /* Garante que o contêiner use a largura máxima */
+    margin-top: 30px;
+}
+
 /* ----------------------------------------------------------------- */
 /* ALINHAMENTO DO BOTÃO 'ENTRAR' E 'HELP SECTION' 
 /* ----------------------------------------------------------------- */
 .login-actions {
-  width: 100%;
   margin-top: 30px;
-  display: flex;
-  justify-content: center;
   
   
   .login-button {
@@ -100,7 +109,7 @@ mat-form-field.full-width {
     max-width: 250px; 
     height: 50px;
     font-size: 1.1em;
-    border-radius: 4px;
+    border-radius: 10px !important ;
   }
 }
 
