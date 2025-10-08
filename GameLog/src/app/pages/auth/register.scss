@@ -1,0 +1,119 @@
+/* src/app/pages/auth/login/login.scss */
+
+$color-accent: #A2FF01; 
+$color-card: #FFFFFF;
+$color-input-bg: #434343;
+$color-text: #030303; 
+$color-dark: #141414;
+$color-white: #FFFFFF;
+
+.auth-wrapper {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: $color-dark;
+}
+
+.login-card {
+  background-color: $color-card; 
+  padding: 60px 40px;
+  width: 100%;
+  max-width: 420px; 
+  border-radius: 8px;
+  box-shadow: 0 0 50px rgba(1, 243, 13, 0.7);
+  color: $color-text;
+}
+
+.main-title {
+  font-size: 2.5em;
+  font-weight: bold;
+  margin-bottom: 30px;
+  color: $color-text;
+  text-align: center;
+}
+
+/* ----------------------------------------------------------------- */
+/* CORREÇÃO CRÍTICA DO INPUT (ENCAIXE E TEXTO) 
+/* ----------------------------------------------------------------- */
+
+mat-form-field.full-width {
+  width: 100%;
+  margin-bottom: 15px;
+  border-radius: 4px; 
+  
+  .mat-form-field-wrapper {
+    padding-bottom: 0 !important;
+    background-color: $color-input-bg !important;
+    border-radius: 4px;
+    
+    /* Remove a borda padrão do Angular Material */
+    border: none !important; 
+
+    .mat-form-field-flex {
+      padding: 10px 15px; 
+      background-color: $color-input-bg !important;
+    }
+  }
+  
+  /* CORREÇÃO DO TEXTO COLADO E COR */
+  .mat-mdc-form-field-input-control {
+    /* Garante que o texto digitado seja Preto */
+    color: $color-text !important; 
+    caret-color: $color-text;
+    padding-left: 15px !important; 
+    background-color: transparent !important;
+  }
+
+  /* Estilização do Label (Placeholder) */
+  .mat-mdc-floating-label {
+    color: $color-white !important;
+  }
+  
+  /* Oculta o sublinhado que estava vazando */
+  .mat-form-field-underline {
+    display: none !important; 
+    height: 0 !important;
+  }
+  
+  /* Garante que o destaque de foco seja no outline */
+  &.mat-focused {
+    .mat-form-field-outline-thick {
+      color: $color-accent !important; 
+    }
+  }
+}
+
+/* ----------------------------------------------------------------- */
+/* ALINHAMENTO DO BOTÃO 'ENTRAR' E 'HELP SECTION' 
+/* ----------------------------------------------------------------- */
+.login-actions {
+  width: 100%;
+  margin-top: 30px;
+  
+  .login-button {
+    width: 100%; 
+    height: 50px;
+    font-size: 1.1em;
+    border-radius: 4px;
+  }
+}
+
+.help-section {
+  display: flex;
+  justify-content: space-between; 
+  align-items: center;
+  margin-top: 15px;
+  font-size: 0.9em;
+  color: #999;
+  
+  .register-link {
+    color: $color-text; 
+    text-decoration: none;
+    
+    &:hover {
+      color: $color-accent;
+      text-decoration: underline;
+    }
+  }
+}

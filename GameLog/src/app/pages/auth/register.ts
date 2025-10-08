@@ -1,18 +1,18 @@
-// src/app/auth/register/register.ts (Completo e Corrigido)
+// src/app/pages/auth/register/register.ts
 
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { Router, RouterModule, ActivatedRoute } from '@angular/router'; 
 import { CommonModule } from '@angular/common';
-import { take } from 'rxjs'; // Importar take para encerrar a inscrição
 
-// Módulos do Material
+// Imports de Material
 import { MatCardModule } from '@angular/material/card'; 
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatInputModule } from '@angular/material/input';
+import { MatFormFieldModule } from '@angular/material/form-field'; 
+import { MatInputModule } from '@angular/material/input'; 
 import { MatButtonModule } from '@angular/material/button';
-import { MatIconModule } from '@angular/material/icon';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+
+import { AuthService } from '../../core/auth.service'; // Serviço que contém o método register()
 
 const AUTH_TOKEN_KEY = 'auth_token'; 
 
@@ -20,81 +20,62 @@ const AUTH_TOKEN_KEY = 'auth_token';
   selector: 'app-register',
   standalone: true,
   imports: [
-    CommonModule, 
-    ReactiveFormsModule, 
-    RouterModule,
-    MatCardModule, 
-    MatFormFieldModule, 
-    MatInputModule, 
-    MatButtonModule, 
-    MatIconModule,
-    MatCheckboxModule 
+    CommonModule, ReactiveFormsModule, RouterModule, 
+    MatCardModule, MatFormFieldModule, MatInputModule, MatButtonModule, MatCheckboxModule
   ],
-  templateUrl: './register.html', 
-  styleUrls: ['./register.scss']
+  templateUrl: './register.html', // Template que acabamos de criar
+  styleUrls: ['./register.scss'] 
 })
 export class Register implements OnInit {
 
   registerForm!: FormGroup; 
-  isLoginMode: boolean = false; 
+  isLoginMode: boolean = false; // Manter como 'false' se for apenas Cadastro
 
   constructor(
     private fb: FormBuilder,
     private router: Router,
-    private route: ActivatedRoute 
-  ) { }
+    private route: ActivatedRoute,
+    private authService: AuthService // Injetamos o AuthService
+  ) { 
+    this.initForm(); 
+  }
 
   ngOnInit(): void {
-    // 1. Usa take(1) para monitorar a rota apenas na inicialização (mais seguro)
-    this.route.url.pipe(take(1)).subscribe(urlSegments => {
-      // Verifica se a URL contém 'login' para definir o modo
-      this.isLoginMode = urlSegments.some(segment => segment.path === 'login');
-      this.initForm(); 
-    });
+    // Inicialização do formulário
   }
 
   initForm(): void {
-    // 🚨 CORREÇÃO CRÍTICA: O formulário só deve ter os campos necessários para ser válido!
-    if (this.isLoginMode) {
-        this.registerForm = this.fb.group({
-            email: ['', [Validators.required, Validators.email]],
-            password: ['', Validators.required]
-        });
-    } else {
-        // Modo Cadastro (Register)
-        this.registerForm = this.fb.group({
-            username: ['', Validators.required],
-            email: ['', [Validators.required, Validators.email]],
-            password: ['', Validators.required],
-            confirmPassword: ['', Validators.required]
-        });
-    }
+    // 🚨 Configuração COMPLETA e CORRETA para CADASTRO
+    this.registerForm = this.fb.group({
+        username: ['', Validators.required],
+        email: ['', [Validators.required, Validators.email]],
+        password: ['', [Validators.required, Validators.minLength(6)]],
+        confirmPassword: ['', Validators.required],
+        lgpdAccepted: [false, Validators.requiredTrue] // A LGPD deve ser true
+    });
   }
 
   onSubmit(): void {
-    // 🚨 Debugging: Verifica se a função está sendo chamada e se o formulário está válido
-    console.log('Botão pressionado. Formulário válido?', this.registerForm.valid); 
-    
     if (this.registerForm.valid) {
-      console.log(`Submissão bem-sucedida em modo ${this.isLoginMode ? 'LOGIN' : 'CADASTRO'}`);
-      
-      const fakeToken = this.isLoginMode ? 'TOKEN_LOGIN_OK' : 'TOKEN_REGISTER_OK';
-      localStorage.setItem(AUTH_TOKEN_KEY, fakeToken); 
-      
-      // Redireciona para o aplicativo, que agora tem a rota /app
-      this.router.navigate(['/app/dashboard']); 
+        const { username, password } = this.registerForm.value;
+        
+        // 1. Chama o método de cadastro (implementado no AuthService)
+        const success = this.authService.register(username, password);
+
+        if (success) {
+            alert('Conta criada! Faça login para continuar.');
+            this.router.navigate(['/login']); // Redireciona para o login
+        } else {
+            alert('Falha no cadastro. Usuário já pode existir ou as senhas não conferem.');
+        }
+
     } else {
-        console.error('Formulário Inválido. Verifique os campos e o initForm.');
-        // Opcional: Marca todos os campos como "touched" para mostrar erros
-        this.registerForm.markAllAsTouched(); 
+        alert('Por favor, preencha todos os campos obrigatórios.');
     }
   }
   
+  // Método para alternar para Login (usado no rodapé do HTML)
   goToLogin(): void {
     this.router.navigate(['/login']);
-  }
-
-  goToRegister(): void {
-    this.router.navigate(['/register']);
   }
 }

@@ -1,22 +1,62 @@
-<form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
-    <mat-card-content class="auth-content">
+<div class="auth-wrapper">
+    <mat-card class="login-card">
         
-        <mat-form-field appearance="outline" class="full-width" *ngIf="!isLoginMode">
-            <mat-label>Nome de Usuário*</mat-label>
-            <input matInput formControlName="username" required>
-            </mat-form-field>
+        <mat-card-title class="main-title">Criar Conta GameLog</mat-card-title>
         
-        <mat-form-field appearance="outline" class="full-width" *ngIf="!isLoginMode">
-            <mat-label>Confirme a Senha*</mat-label>
-            <input matInput formControlName="confirmPassword" type="password" required>
-            </mat-form-field>
-        
-    </mat-card-content>
+        <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+            
+            <mat-card-content class="form-content">
+                
+                <mat-form-field appearance="outline" class="full-width">
+                    <mat-label>Nome de Usuário*</mat-label>
+                    <input matInput formControlName="username" required>
+                    <mat-error *ngIf="registerForm.get('username')?.invalid && registerForm.get('username')?.touched">
+                        O nome de usuário é obrigatório.
+                    </mat-error>
+                </mat-form-field>
 
-    <mat-card-actions class="auth-actions">
-        <button mat-raised-button color="primary" [disabled]="registerForm.invalid" type="submit">
-            {{ isLoginMode ? 'Entrar' : 'Cadastrar' }}
-        </button>
-    </mat-card-actions>
-    
-    </form>
+                <mat-form-field appearance="outline" class="full-width">
+                    <mat-label>Email*</mat-label>
+                    <input matInput formControlName="email" type="email" required>
+                    <mat-error *ngIf="registerForm.get('email')?.invalid && registerForm.get('email')?.touched">
+                        Email é obrigatório e precisa ser válido.
+                    </mat-error>
+                </mat-form-field>
+
+                <mat-form-field appearance="outline" class="full-width">
+                    <mat-label>Senha*</mat-label>
+                    <input matInput formControlName="password" type="password" required>
+                    <mat-error *ngIf="registerForm.get('password')?.invalid && registerForm.get('password')?.touched">
+                        A senha é obrigatória.
+                    </mat-error>
+                </mat-form-field>
+                
+                <mat-form-field appearance="outline" class="full-width">
+                    <mat-label>Confirme a Senha*</mat-label>
+                    <input matInput formControlName="confirmPassword" type="password" required>
+                    <mat-error *ngIf="registerForm.get('confirmPassword')?.invalid && registerForm.get('confirmPassword')?.touched">
+                        A confirmação da senha é obrigatória.
+                    </mat-error>
+                </mat-form-field>
+                
+                <mat-checkbox formControlName="lgpdAccepted" required class="lgpd-checkbox">
+                    Eu li e aceito os termos de uso e a LGPD.
+                </mat-checkbox>
+                <mat-error class="validation-error" *ngIf="registerForm.get('lgpdAccepted')?.invalid && registerForm.get('lgpdAccepted')?.touched">
+                    A aceitação da LGPD é obrigatória.
+                </mat-error>
+
+                <div class="login-actions">
+                    <button mat-raised-button color="primary" type="submit" class="full-width login-button">
+                        Cadastrar
+                    </button>
+                </div>
+            </mat-card-content>
+        </form>
+
+        <mat-card-footer class="auth-footer">
+            <span>Já tem uma conta? </span>
+            <a (click)="goToLogin()" class="register-link">Faça Login</a>
+        </mat-card-footer>
+    </mat-card>
+</div>
