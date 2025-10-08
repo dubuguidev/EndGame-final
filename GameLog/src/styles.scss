@@ -85,3 +85,13 @@ body {
         background-color: #434343;
     }
 }
+
+.mat-mdc-raised-button { /* Seletor de classe nativa do botão elevado */
+    border-radius: 10px !important;
+}
+
+/* OU, se for a versão legacy: */
+
+.mat-raised-button {
+    border-radius: 10px !important;
+}

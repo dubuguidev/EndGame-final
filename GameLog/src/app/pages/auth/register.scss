@@ -109,7 +109,16 @@ mat-card-actions {
     max-width: 250px; 
     height: 50px;
     font-size: 1.1em;
-    border-radius: 10px !important ;
+    
+    /* 🚨 SOLUÇÃO FINAL: Aplica o raio de borda ao componente Material raiz */
+        .mat-mdc-button-base { /* Seletor comum para botões no Material 15+ */
+            border-radius: 10px !important; 
+        }
+        
+        /* Caso o seletor acima não funcione, use a tag direta */
+        &.mat-raised-button {
+            border-radius: 10px !important; 
+        }
   }
 }
 
