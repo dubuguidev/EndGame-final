@@ -1,119 +1,113 @@
-/* src/app/auth/login/login.scss */
+/* src/app/pages/auth/login/login.scss */
 
-.login-page-container {
+$color-accent: #A2FF01;      /* Verde Neon */
+$color-card: #ffffff;        /* Fundo da Caixa de Login */
+$color-input-bg: #333333;    /* Fundo escuro sutil para inputs */
+$color-text: #030303;        /* para o Texto */
+$color-dark: #141414;        /* Cor do texto nos botões */
+
+
+.auth-wrapper {
+    /* Centraliza a caixa de login na tela */
     height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 20px;
-    background-color: #141414; /* Fundo Preto Principal */
+    background-color: $color-dark;
 }
 
-/* ----------------------------------------------------------------- */
-/* COLUNA DO FORMULÁRIO (ESQUERDA)                                   */
-/* ----------------------------------------------------------------- */
-.login-form-panel {
-    background-color: #1e1e1e; /* Fundo levemente mais claro que o body */
-    padding: 60px 40px;
-    max-width: 450px;
+.login-card {
+    background-color: $color-card; 
+    padding: 100px 40px;
     width: 100%;
-    border-radius: 8px 0 0 8px; /* Borda arredondada só na esquerda */
-    color: #ffffff;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-    
-    .main-title {
-        font-size: 2.5em;
-        margin-bottom: 5px;
-        color: #FFFFFF;
-    }
-    .subtitle {
-        color: #A2FF01; 
-        margin-bottom: 30px;
-    }
+    max-width: 420px; 
+    border-radius: 8px;
+    box-shadow: 0 0 50px #A2FF01;      /* Verde Neon */
+;
+    color: $color-text;
+}
 
-    form {
-        margin-top: 20px;
-    }
-    
-    .login-button {
-        width: 100%;
-        margin-top: 20px;
-        height: 50px;
-    }
+.main-title {
+    font-size: 2.5em;
+    font-weight: bold;
+    margin-bottom: 30px;
+    color: $color-text;
+    text-align: center;
 }
 
 /* ----------------------------------------------------------------- */
-/* COLUNA DA ILUSTRAÇÃO (DIREITA)                                    */
+/* CORREÇÃO CRÍTICA DO INPUT E LAYOUT                                */
 /* ----------------------------------------------------------------- */
-.login-illustration-panel {
-    background-color: #434343; /* Fundo Cinza Secundário */
-    width: 350px;
-    height: 650px; /* Ajusta a altura para ficar alinhado ao painel de login */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-radius: 0 8px 8px 0; /* Borda arredondada só na direita */
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+
+mat-form-field.full-width {
+    width: 100%;
+    margin-bottom: 15px;
+    border-radius: 10px;
     
-    .illustration-placeholder {
-        text-align: center;
-        color: #A2FF01;
-        mat-icon {
-            font-size: 80px;
-            width: 80px;
-            height: 80px;
-            margin-bottom: 10px;
+    .mat-form-field-wrapper {
+        padding-bottom: 0 !important;
+        background-color: $color-input-bg !important;
+        border-radius: 4px;
+        border: none !important; // 🔥 Remove a borda preta do retângulo
+
+        .mat-form-field-flex {
+            padding: 10px 15px; /* Padding externo do flex (mantido) */
+            background-color: $color-input-bg !important;
+        }
+}
+
+    /* 🚨 CORREÇÃO FINAL DO TEXTO COLADO: Adiciona padding ao input element */
+    .mat-mdc-form-field-input-control {
+        // Zera o padding que estava causando o problema e adiciona o espaçamento correto
+        padding-left: 15px !important; 
+    }
+    
+    /* Oculta o sublinhado que estava vazando */
+    .mat-form-field-underline {
+        display: none !important; 
+        height: 0 !important;
+    }
+    
+    /* Garante que o destaque de foco seja no outline */
+    &.mat-focused {
+        .mat-form-field-outline-thick {
+            color: $color-accent !important; /* Borda Verde Neon */
         }
     }
 }
 
-
 /* ----------------------------------------------------------------- */
-/* ELEMENTOS DIVERSOS (Separação, Links)                             */
+/* ALINHAMENTO DO BOTÃO 'ENTRAR' E 'HELP SECTION'                    */
 /* ----------------------------------------------------------------- */
-.separator-or {
-    display: flex;
-    align-items: center;
-    text-align: center;
-    margin: 20px 0;
-    color: #434343;
-    
-    .line {
-        flex-grow: 1;
-        height: 1px;
-        background-color: #434343;
-    }
-    .text {
-        padding: 0 15px;
-        font-size: 0.9em;
-    }
-}
-
-.forgot-password {
-    display: block;
-    text-align: right;
-    color: #A2FF01;
-    text-decoration: none;
-    font-size: 0.9em;
-    margin-bottom: 20px;
-    
-    &:hover {
-        text-decoration: underline;
-    }
-}
-
-.register-link-container {
-    text-align: center;
-    font-size: 0.9em;
+.login-actions {
+    width: 100%;
     margin-top: 30px;
-    color: #b0b0b0;
+    
+    .login-button {
+        width: 100%; 
+        height: 50px;
+        font-size: 1.1em;
+        border-radius: 10px;
+    }
+}
+
+.help-section {
+    display: flex;
+    background-color: #030303;
+    justify-content: space-between; 
+    align-items: center;
+    margin-top: 15px;
+    font-size: 0.9em;
+    color: #A2FF01;
+    border-radius: 10px;
+    cursor: pointer;
     
     .register-link {
-        color: #A2FF01;
-        font-weight: bold;
+        color: #A2FF01; 
         text-decoration: none;
         
         &:hover {
+            color: $color-accent;
             text-decoration: underline;
         }
     }

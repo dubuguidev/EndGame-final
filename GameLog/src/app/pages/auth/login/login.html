@@ -1,14 +1,14 @@
-<div class="auth-container">
-    <mat-card class="auth-card">
-        <mat-card-header>
-            <mat-card-title>Faça Login no GameLog</mat-card-title>
-        </mat-card-header>
-
+<div class="auth-wrapper">
+    <mat-card class="login-card">
+        
+        <mat-card-title class="main-title">Entrar</mat-card-title>
+        
         <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
-            <mat-card-content class="auth-content">
+            
+            <mat-card-content class="form-content">
                 
                 <mat-form-field appearance="outline" class="full-width">
-                    <mat-label>Email*</mat-label>
+                    <mat-label>Email ou Nome de Usuário*</mat-label>
                     <input matInput formControlName="email" type="email" required>
                 </mat-form-field>
 
@@ -17,18 +17,19 @@
                     <input matInput formControlName="password" type="password" required>
                 </mat-form-field>
                 
+                <div class="login-actions">
+                    <button mat-raised-button color="primary" type="submit" class="full-width login-button">
+                        Entrar
+                    </button>
+                </div>
+                
+                <div class="help-section">
+                    <mat-checkbox class="remember-me" formControlName="rememberMe">Lembre-se de mim</mat-checkbox>
+                    
+                    <a (click)="goToRegister()" class="register-link">Cadastre-se</a>
+                </div>
             </mat-card-content>
-
-            <mat-card-actions class="auth-actions">
-                <button mat-raised-button color="primary" [disabled]="loginForm.invalid" type="submit">
-                    Entrar
-                </button>
-            </mat-card-actions>
         </form>
 
-        <mat-card-footer class="auth-footer">
-            <span>Não tem conta? </span>
-            <a (click)="goToRegister()" class="link">Crie sua conta aqui</a>
-        </mat-card-footer>
     </mat-card>
 </div>

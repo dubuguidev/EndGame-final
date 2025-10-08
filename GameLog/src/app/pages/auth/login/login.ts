@@ -1,16 +1,17 @@
-// src/app/pages/auth/login/login.ts
+// src/app/pages/auth/login/login.ts (Completo)
 
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { Router, RouterModule } from '@angular/router'; 
 import { CommonModule } from '@angular/common';
 
-// Imports de Material
+// Módulos do Material
 import { MatCardModule } from '@angular/material/card'; 
 import { MatFormFieldModule } from '@angular/material/form-field'; 
 import { MatInputModule } from '@angular/material/input'; 
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
+import { MatCheckboxModule } from '@angular/material/checkbox'; // Necessário para o 'Lembre-se de mim'
 
 const AUTH_TOKEN_KEY = 'auth_token'; 
 
@@ -19,12 +20,12 @@ const AUTH_TOKEN_KEY = 'auth_token';
   standalone: true,
   imports: [
     CommonModule, ReactiveFormsModule, RouterModule,
-    MatCardModule, MatFormFieldModule, MatInputModule, MatButtonModule, MatIconModule
+    MatCardModule, MatFormFieldModule, MatInputModule, MatButtonModule, MatIconModule, MatCheckboxModule
   ],
-  templateUrl: './login.html', // <-- Garantimos que o nome do template é o mesmo
+  templateUrl: './login.html', 
   styleUrls: ['./login.scss']
 })
-export class Login implements OnInit { // <-- Classe principal
+export class Login implements OnInit { 
 
   loginForm!: FormGroup; 
 
@@ -34,19 +35,21 @@ export class Login implements OnInit { // <-- Classe principal
   ) { }
 
   ngOnInit(): void {
+    // Configuração do formulário de LOGIN
     this.loginForm = this.fb.group({
-      email: ['', [Validators.required, Validators.email]],
-      password: ['', Validators.required]
+      email: ['', [Validators.required, Validators.email]], // Email ou nome de usuário
+      password: ['', Validators.required],
+      rememberMe: [false] // Para o checkbox
     });
   }
 
   onSubmit(): void {
     if (this.loginForm.valid) {
-      // 1. Simulação de sucesso de login
+      // Simulação de sucesso de login
       const fakeToken = 'Auth_Token_OK'; 
       localStorage.setItem(AUTH_TOKEN_KEY, fakeToken); 
       
-      // 2. Redireciona para a rota protegida principal
+      // Redireciona para a rota protegida principal
       this.router.navigate(['/app/dashboard']); 
     }
   }
