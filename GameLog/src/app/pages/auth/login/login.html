@@ -8,19 +8,13 @@
             <mat-card-content class="auth-content">
                 
                 <mat-form-field appearance="outline" class="full-width">
-                    <mat-label>Email</mat-label>
+                    <mat-label>Email*</mat-label>
                     <input matInput formControlName="email" type="email" required>
-                    <mat-error *ngIf="loginForm.get('email')?.invalid && loginForm.get('email')?.touched">
-                        Email é obrigatório e precisa ser válido.
-                    </mat-error>
                 </mat-form-field>
 
                 <mat-form-field appearance="outline" class="full-width">
-                    <mat-label>Senha</mat-label>
+                    <mat-label>Senha*</mat-label>
                     <input matInput formControlName="password" type="password" required>
-                    <mat-error *ngIf="loginForm.get('password')?.hasError('required') && loginForm.get('password')?.touched">
-                        A senha é obrigatória.
-                    </mat-error>
                 </mat-form-field>
                 
             </mat-card-content>
@@ -34,7 +28,7 @@
 
         <mat-card-footer class="auth-footer">
             <span>Não tem conta? </span>
-            <a routerLink="/register" class="link">Crie sua conta aqui</a>
+            <a (click)="goToRegister()" class="link">Crie sua conta aqui</a>
         </mat-card-footer>
     </mat-card>
 </div>
