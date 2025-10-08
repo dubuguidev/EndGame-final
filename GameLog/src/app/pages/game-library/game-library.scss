@@ -30,25 +30,32 @@
     flex-shrink: 0;    /* IMPEDE o card de encolher: ESSENCIAL para o carrossel */
     flex-grow: 0;      /* Impede o card de crescer */
     width: 280px;      /* Largura fixa do card */
+    box-shadow: 15px 15px 15px  #ffffff;
     
     /* Estilo do Material Card */
-    background-color: #1e1e1e; 
-    color: #ffffff; 
+    background-color: #000000; 
+    color: #a2ff01; 
     border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+    // box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+
+    &:hover{ //efeito do card
+        transform: translateY(10px);
+        box-shadow: 15px 15px 15px  #a2ff01;
+        transition: all 0.2s ease;
+    }
     
     mat-card-content {
         padding: 0 16px 16px; 
     }
     
-    .synopsis {
+    .synopsis { // cor da sinopse
         font-size: 0.9em;
-        color: #b0b0b0;
+        color: #ffffff;
         margin-top: 5px;
     }
-    .hours {
+    .hours { // cor das horas
         font-weight: bold;
-        color: #2ecc71; 
+        color: #04d315; 
         margin-top: 10px;
     }
 }
