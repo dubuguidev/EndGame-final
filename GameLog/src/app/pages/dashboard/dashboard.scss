@@ -1,15 +1,13 @@
-/* src/app/pages/dashboard/dashboard.scss */
-
 .dashboard-container {
     padding: 30px;
     color: #ffffff;
 }
 
-h1 {
-    font-size: 2.2em;
-    margin-bottom: 25px;
-    color: #ffffff;
-}
+// h1 {
+//     font-size: 2.2em;
+//     margin-bottom: 25px;
+//     color: #ffffff;
+// }
 
 .section-title {
     font-size: 1.6em;
@@ -18,9 +16,9 @@ h1 {
     color: #A2FF01;
 }
 
-/* ----------------------------------------------------------------- */
-/* GRID DE ESTATÍSTICAS (Similar ao modelo)                           */
-/* ----------------------------------------------------------------- */
+
+// GRID DE ESTATÍSTICAS (Similar ao modelo)      
+
 .stats-grid {
     display: grid;
     /* 4 colunas com espaçamento */
@@ -30,10 +28,11 @@ h1 {
 }
 
 .stat-card {
-    background-color: #1e1e1e; /* Fundo do cartão */
+    background-color: #000000; /* Fundo do cartão */
     color: #ffffff;
     border-radius: 8px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+    box-shadow: 5px 5px 5px #A2FF01;
+    
 
     mat-card-header {
         border-bottom: 1px solid #434343; /* Linha separadora sutil */
@@ -49,6 +48,12 @@ h1 {
             color: #b0b0b0; /* Texto mais suave */
         }
     }
+
+    &:hover {
+        transform: translateY(-4px);
+        box-shadow: 20px 20px 20px #A2FF01;
+        transition: all 0.2s ease;
+}
 
     .stat-value {
         font-size: 3em;

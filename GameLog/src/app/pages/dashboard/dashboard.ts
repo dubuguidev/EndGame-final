@@ -1,5 +1,3 @@
-// src/app/pages/dashboard/dashboard.ts (Corrigido para usar o GameService)
-
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Observable } from 'rxjs';
@@ -35,8 +33,6 @@ export class Dashboard implements OnInit {
   constructor(private gameService: GameService) { }
 
   ngOnInit(): void {
-    // Implemente o método de estatísticas no GameService e chame ele aqui
-    // Se você não tiver um método 'getStats()', a linha abaixo pode ser comentada
-    // this.stats$ = this.gameService.getStats(); 
+    this.stats$ = this.gameService.getStats(); 
   }
 }
