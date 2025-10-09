@@ -1,21 +1,28 @@
 @use "sass:color"; 
 
 // Oculta a barra de rolagem vertical (conforme sua solicitação anterior)
-body::-webkit-scrollbar {
-    display: none;
-    width: 0; 
-    height: 0;
-}
+// body::-webkit-scrollbar {
+//     display: none;
+//     width: 0; 
+//     height: 0;
+
+
 body {
-    -ms-overflow-style: none; /* IE and Edge */
-    scrollbar-width: none;  /* Firefox */
-    overflow-y: hidden;     /* Garante que o overflow vertical seja escondido */
+    // -ms-overflow-style:none; /* IE and Edge */
+    // scrollbar-width:12px;  /* Firefox */
+    // overflow-y:visible;     /* Garante que o overflow vertical seja escondido */
     
     /* Aplica a cor de fundo principal e texto */
     background-color: #141414; /* Fundo Preto Escuro */
     color: #ffffff; /* Texto Branco */
     font-family: 'Roboto', sans-serif; 
 }
+
+body::-webkit-scrollbar {
+    width: 12px;
+
+}
+
 
 
 // Estilo para todos os botões que não são ícones ou simples

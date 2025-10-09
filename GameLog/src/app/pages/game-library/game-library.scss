@@ -2,6 +2,11 @@
     padding: 20px 0;
 }
 
+.title-library {
+    color: #a2ff01;
+    height: 40px;
+}
+
 .game-carousel {
     display: flex;
     flex-wrap: nowrap; 
@@ -24,7 +29,6 @@
     background-color: #000000; 
     color: #a2ff01; 
     border-radius: 8px;
-    // box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
 
     &:hover{ //efeito do card
         transform: translateY(10px);
