@@ -39,14 +39,14 @@ export const routes: Routes = [
             // Dashboard (Onde está o carrossel)
             { 
                 path: 'dashboard', 
-                canActivate: [authGuard],
+                // canActivate: [authGuard],
                 loadComponent: () => import('./pages/dashboard/dashboard').then(c => c.Dashboard) 
             },
             
             // Meus Jogos (Lista)
             { 
                 path: 'meus-jogos', 
-                canActivate: [authGuard],
+                // canActivate: [authGuard],
                 loadComponent: () => import('./pages/game-list/game-list').then(c => c.GameList) 
             },
             
@@ -70,5 +70,5 @@ export const routes: Routes = [
     },
 
     // 3. Rota Coringa (Redireciona qualquer rota não encontrada para o Login)
-    { path: '**', redirectTo: 'login' } 
+    { path: '**', redirectTo: 'dashboard' } 
 ];
