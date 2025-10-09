@@ -15,12 +15,13 @@ $color-primary: #FFFFFF;
     /* APLICAMOS O FLEXBOX AQUI: Resolver o esmagamento e o desalinhamento */
     display: flex;
     align-items: center;
+    justify-content: space-between;
     gap: 15px; 
 }
 
 /* 🚨 CORREÇÃO CRÍTICA: Forçar links a serem brancos (aqui resolve o problema de cor) */
 .app-header-container a {
-    color: $color-primary !important;
+    color: $color-primary ;
     text-decoration: none;
     font-weight: 500;
     transition: color 0.2s ease-in-out;

@@ -26,11 +26,6 @@
                     <mat-label>Confirme a Senha*</mat-label>
                     <input matInput formControlName="confirmPassword" type="password" required>
                 </mat-form-field>
-                
-                <mat-checkbox formControlName="lgpdAccepted" required class="lgpd-checkbox">
-                    Eu li e aceito os termos de uso e a LGPD.
-                </mat-checkbox>
-                
             </mat-card-content>
 
             <mat-card-actions class="auth-actions">
@@ -43,7 +38,7 @@
         <div class="register-footer-info">
             <p class="terms-text">
                 Ao se cadastrar, você concorda com nossos 
-                <a href="https://www.gov.br/mds/pt-br/acesso-a-informacao/governanca/integridade/campanhas/lgpd" class="terms-link">Termos de Serviço</a> e Política de Privacidade.
+                <a (click)="openLgpdDialog()" class="terms-link">Termos de Serviço e Política de LGPD</a>.
             </p>
         </div>
 

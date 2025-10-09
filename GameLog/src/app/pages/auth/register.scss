@@ -164,6 +164,12 @@ mat-card-actions {
         &:hover {
             text-decoration: underline;
         }
+
+      .terms-link a {
+        cursor: pointer;
+        color: #A2FF01; // Sua cor de destaque
+        text-decoration: underline;
+}
     }
     
     .terms-text {
@@ -172,3 +178,4 @@ mat-card-actions {
         font-weight:bolder;
     }
 }
+
