@@ -2,8 +2,6 @@
 
 import { Routes } from '@angular/router';
 import { authGuard } from './core/auth.guard'; // 🚨 CORREÇÃO: Usamos o Guard do core
-// import { Layout } from './shared/layout/layout';
-// NOTA: O ofuscamento na linha 4 é um aviso do seu editor, não um erro fatal.
 
 export const routes: Routes = [
     
@@ -41,18 +39,21 @@ export const routes: Routes = [
             // Dashboard (Onde está o carrossel)
             { 
                 path: 'dashboard', 
+                canActivate: [authGuard],
                 loadComponent: () => import('./pages/dashboard/dashboard').then(c => c.Dashboard) 
             },
             
             // Meus Jogos (Lista)
             { 
                 path: 'meus-jogos', 
+                canActivate: [authGuard],
                 loadComponent: () => import('./pages/game-list/game-list').then(c => c.GameList) 
             },
             
             // Formulários (Adicionar/Editar)
             { 
                 path: 'adicionar-jogo', 
+                canActivate: [authGuard],
                 loadComponent: () => import('./pages/game-form/game-form').then(c => c.GameForm) 
             },
             { 
