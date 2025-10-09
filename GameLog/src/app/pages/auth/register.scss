@@ -1,4 +1,3 @@
-/* src/app/pages/auth/login/login.scss */
 @use '../auth/background.scss';
 
 $color-accent: #A2FF01; 
@@ -35,10 +34,6 @@ $color-white: #FFFFFF;
   text-align: center;
 }
 
-/* ----------------------------------------------------------------- */
-/* CORREÇÃO CRÍTICA DO INPUT (ENCAIXE E TEXTO) 
-/* ----------------------------------------------------------------- */
-
 mat-form-field.full-width {
     width: 100%;
     height: 57px;
@@ -49,7 +44,6 @@ mat-form-field.full-width {
     background-color: $color-input-bg !important;
     border-radius: 4px;
     
-    /* Remove a borda padrão do Angular Material */
     border: none !important; 
 
     .mat-form-field-flex {
@@ -58,27 +52,22 @@ mat-form-field.full-width {
     }
   }
   
-  /* CORREÇÃO DO TEXTO COLADO E COR */
   .mat-mdc-form-field-input-control {
-    /* Garante que o texto digitado seja Preto */
     color: $color-text !important; 
     caret-color: $color-text;
     padding-left: 15px !important; 
     background-color: transparent !important;
   }
 
-  /* Estilização do Label (Placeholder) */
   .mat-mdc-floating-label {
     color: $color-white !important;
   }
   
-  /* Oculta o sublinhado que estava vazando */
   .mat-form-field-underline {
     display: none !important; 
     height: 0 !important;
   }
   
-  /* Garante que o destaque de foco seja no outline */
   &.mat-focused {
     .mat-form-field-outline-thick {
       color: $color-accent !important; 
@@ -91,7 +80,6 @@ mat-card-actions {
     display: flex; /* Adiciona Flexbox ao pai do botão */
     justify-content: center; /* Centraliza o botão */
     
-    /* Zera o padding lateral que o Material adiciona por padrão */
     padding-left: 0 !important;
     padding-right: 0 !important;
     
@@ -99,9 +87,6 @@ mat-card-actions {
     margin-top: 30px;
 }
 
-/* ----------------------------------------------------------------- */
-/* ALINHAMENTO DO BOTÃO 'ENTRAR' E 'HELP SECTION' 
-/* ----------------------------------------------------------------- */
 .login-actions {
   margin-top: 30px;
   
@@ -112,12 +97,10 @@ mat-card-actions {
     height: 50px;
     font-size: 1.1em;
     
-    /* 🚨 SOLUÇÃO FINAL: Aplica o raio de borda ao componente Material raiz */
         .mat-mdc-button-base { /* Seletor comum para botões no Material 15+ */
             border-radius: 10px !important; 
         }
         
-        /* Caso o seletor acima não funcione, use a tag direta */
         &.mat-raised-button {
             border-radius: 10px !important; 
         }
@@ -143,9 +126,6 @@ mat-card-actions {
   }
 }
 
-/* ----------------------------------------------------------------- */
-/* NOVO BLOCO: INFORMAÇÕES LEGAIS E LINK DE LOGIN                    */
-/* ----------------------------------------------------------------- */
 .register-footer-info {
     text-align: center;
     padding-top: 15px;

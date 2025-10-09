@@ -13,7 +13,6 @@ import { MatButtonModule } from '@angular/material/button';
   styleUrls: ['./lgpd.scss']
 })
 export class LgpdDialogComponent {
-  // Injetamos uma referência ao próprio dialog para podermos fechá-lo
   constructor(public dialogRef: MatDialogRef<LgpdDialogComponent>) {}
 
   closeDialog(): void {

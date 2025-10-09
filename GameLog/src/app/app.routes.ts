@@ -1,5 +1,3 @@
-// src/app/app.routes.ts
-
 import { Routes } from '@angular/router';
 import { authGuard } from './core/auth.guard'; // 🚨 CORREÇÃO: Usamos o Guard do core
 
@@ -29,7 +27,6 @@ export const routes: Routes = [
     
     {
         path: 'app', // URL principal protegida: /app/dashboard
-        // component: Layout,
         canActivate: [authGuard], 
         children: [
             

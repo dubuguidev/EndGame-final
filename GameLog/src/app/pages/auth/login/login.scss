@@ -38,9 +38,6 @@ $color-dark: #141414;        /* Cor do texto nos botões */
     text-align: center;
 }
 
-/* ----------------------------------------------------------------- */
-/* CORREÇÃO CRÍTICA DO INPUT E LAYOUT                                */
-/* ----------------------------------------------------------------- */
 
 mat-form-field.full-width {
     width: 100%;
@@ -52,7 +49,6 @@ mat-form-field.full-width {
         padding-bottom: 0 !important;
         background-color: $color-input-bg !important;
         border-radius: 4px;
-        border: none !important; // 🔥 Remove a borda preta do retângulo
 
         .mat-form-field-flex {
             padding: 10px 15px; /* Padding externo do flex (mantido) */
@@ -60,19 +56,15 @@ mat-form-field.full-width {
         }
 }
 
-    /* 🚨 CORREÇÃO FINAL DO TEXTO COLADO: Adiciona padding ao input element */
     .mat-mdc-form-field-input-control {
-        // Zera o padding que estava causando o problema e adiciona o espaçamento correto
         padding-left: 15px !important; 
     }
     
-    /* Oculta o sublinhado que estava vazando */
     .mat-form-field-underline {
         display: none !important; 
         height: 0 !important;
     }
     
-    /* Garante que o destaque de foco seja no outline */
     &.mat-focused {
         .mat-form-field-outline-thick {
             color: $color-accent !important; /* Borda Verde Neon */
@@ -80,9 +72,6 @@ mat-form-field.full-width {
     }
 }
 
-/* ----------------------------------------------------------------- */
-/* ALINHAMENTO DO BOTÃO 'ENTRAR' E 'HELP SECTION'                    */
-/* ----------------------------------------------------------------- */
 .login-actions {
     width: 100%;
     margin-top: 30px;

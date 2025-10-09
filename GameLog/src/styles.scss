@@ -1,13 +1,4 @@
-/* src/styles.scss */
-
-// -----------------------------------------------------------------
-// 🚨 CORREÇÃO SASS: Importar o módulo 'color' para usar funções modernas (color.adjust)
-// -----------------------------------------------------------------
 @use "sass:color"; 
-
-/* ----------------------------------------------------------------- */
-/* RESET E CORES GLOBAIS (APLICADO AO CORPO DA PÁGINA)               */
-/* ----------------------------------------------------------------- */
 
 // Oculta a barra de rolagem vertical (conforme sua solicitação anterior)
 body::-webkit-scrollbar {
@@ -26,9 +17,6 @@ body {
     font-family: 'Roboto', sans-serif; 
 }
 
-/* ----------------------------------------------------------------- */
-/* PADRÃO DE BOTÕES (APLICADO A TODOS OS MAT-BUTTONS)                */
-/* ----------------------------------------------------------------- */
 
 // Estilo para todos os botões que não são ícones ou simples
 .mat-button, .mat-raised-button, .mat-flat-button, .mat-stroked-button {
@@ -45,7 +33,6 @@ body {
     box-shadow: 0 4px 6px rgba(#434343, 0.4); /* Sombra Cinza */
 
     &:hover {
-        /* CORREÇÃO: Usando color.adjust no lugar de darken(#A2FF01, 5%) */
         background-color: color.adjust(#A2FF01, $lightness: -5%) !important; 
         transform: translateY(-2px); /* Animação: Sobe 2px */
         box-shadow: 0 6px 10px rgba(#434343, 0.6); /* Sombra mais intensa */
@@ -57,9 +44,6 @@ body {
     }
 }
 
-/* ----------------------------------------------------------------- */
-/* ESTILIZAÇÃO PADRÃO DO MATERIAL INPUTS (CAMPOS DE FORMULÁRIO)      */
-/* ----------------------------------------------------------------- */
 
 // Garante que os campos de entrada tenham um estilo escuro consistente
 .mat-form-field {

@@ -1,13 +1,9 @@
-// src/app/pages/auth/auth.ts
-
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router, RouterModule } from '@angular/router';
 
-// IMPORTS REATIVOS ESSENCIAIS
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms'; 
 
-// Angular Material Imports
 import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
@@ -69,10 +65,6 @@ export class Login implements OnInit {
     });
   }
 
-  /**
-   * MÉTODO ADICIONADO: Redireciona para a rota de cadastro.
-   * Usado no template auth.html (agora com o link "Cadastre-se aqui").
-   */
   goToRegister(): void {
     this.router.navigate(['/register']); 
   }

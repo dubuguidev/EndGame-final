@@ -3,12 +3,6 @@
     color: #ffffff;
 }
 
-// h1 {
-//     font-size: 2.2em;
-//     margin-bottom: 25px;
-//     color: #ffffff;
-// }
-
 .section-title {
     font-size: 1.6em;
     margin-top: 30px;
@@ -17,11 +11,9 @@
 }
 
 
-// GRID DE ESTATÍSTICAS (Similar ao modelo)      
 
 .stats-grid {
     display: grid;
-    /* 4 colunas com espaçamento */
     grid-template-columns: repeat(4, 1fr); 
     gap: 20px;
     margin-bottom: 40px;

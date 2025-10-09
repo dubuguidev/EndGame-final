@@ -1,11 +1,8 @@
-// src/app/pages/game-form/game-form.ts
-
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { Router } from '@angular/router'; // Importa o Router
 import { CommonModule } from '@angular/common';
 
-// Módulos do Material (Ajuste conforme os módulos que você está usando no HTML)
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
@@ -19,7 +16,6 @@ import { Game } from '../../models/game.model'; // Ajuste o caminho conforme sua
 
 @Component({
   selector: 'app-game-form',
-  // Renomeando para GameForm, se o seu arquivo for game-form.ts
   standalone: true,
   imports: [
     CommonModule, 
@@ -47,9 +43,8 @@ export class GameForm implements OnInit { // <-- Classe sem o sufixo 'Component'
   }
 
   ngOnInit(): void {
-    // Se você estiver implementando a lógica de edição, ela viria aqui:
-    // Ex: const id = this.route.snapshot.paramMap.get('id');
-    // if (id) { this.loadGameForEdit(id); }
+    // const id = this.route.snapshot.paramMap.get('id');
+    //   if (id) { this.loadGameForEdit(id); 
   }
 
   private initForm(): void {
@@ -73,14 +68,11 @@ export class GameForm implements OnInit { // <-- Classe sem o sufixo 'Component'
       const game: Game = this.gameForm.value;
       this.gameService.saveGame(game);
       
-      // Volta para a lista de jogos após salvar
       this.router.navigate(['/meus-jogos']); 
     }
   }
 
-  // MÉTODO onCancel() CORRIGIDO: Necessário para o clique no HTML
   onCancel(): void {
-    // Navega de volta para a lista de jogos
     this.router.navigate(['/meus-jogos']); 
   }
 }

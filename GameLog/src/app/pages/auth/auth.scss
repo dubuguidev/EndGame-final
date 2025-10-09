@@ -31,13 +31,11 @@ $color-background: #F4F4F4;
       margin-bottom: 20px;
     }
     
-    /* Pré-Configuração de Espaço para Ícone de Login */
     .login-icon-placeholder {
         display: block;
         text-align: center;
         margin-bottom: 20px;
         
-        /* Icone-boladex*/
         mat-icon {
             font-size: 60px;
             height: 60px;
@@ -46,7 +44,6 @@ $color-background: #F4F4F4;
         }
     }
     
-    /* Estilo do Botão de Login (Verde/Preto) */
     .login-button {
         margin-top: 20px;
     }

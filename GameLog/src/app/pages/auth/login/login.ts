@@ -1,11 +1,8 @@
-// src/app/pages/auth/login/login.ts (Completo)
-
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { Router, RouterModule } from '@angular/router'; 
 import { CommonModule } from '@angular/common';
 
-// Módulos do Material
 import { MatCardModule } from '@angular/material/card'; 
 import { MatFormFieldModule } from '@angular/material/form-field'; 
 import { MatInputModule } from '@angular/material/input'; 

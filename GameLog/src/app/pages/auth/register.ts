@@ -3,16 +3,14 @@ import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angula
 import { Router, RouterModule, ActivatedRoute } from '@angular/router';
 import { CommonModule } from '@angular/common';
 
-// Imports de Material
 import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 
-// 👇 INFORMAÇÕES DO LGPD 👇
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
-// Corrigido o caminho para o componente compartilhado que criamos
+
 import { LgpdDialogComponent } from '../auth/login/lgpd/lgpd';
 
 import { AuthService } from '../../core/auth.service'; // Ajustado o caminho para subir dois níveis
@@ -78,7 +76,7 @@ export class Register implements OnInit {
     this.router.navigate(['/login']);
   }
 
-  // 👇 NOVO MÉTODO PARA ABRIR O POP-UP 👇
+  // Abrir pop-up
   openLgpdDialog(): void {
     this.dialog.open(LgpdDialogComponent, {
       width: '600px',
