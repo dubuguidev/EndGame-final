@@ -1,4 +1,5 @@
 /* src/app/pages/auth/login/login.scss */
+@use '../auth/background.scss';
 
 $color-accent: #A2FF01; 
 $color-card: #FFFFFF;
@@ -8,11 +9,12 @@ $color-dark: #141414;
 $color-white: #FFFFFF;
 
 .auth-wrapper {
+  @extend .background-login;
   height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: $color-dark;
+  background-color: transparent !important;
 }
 
 .login-card {
