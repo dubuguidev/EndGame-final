@@ -5,27 +5,16 @@
 }
 
 .game-carousel {
-    /* 1. Habilita o layout flexível */
     display: flex;
-    
-    /* 2. ESSENCIAL: Impede a quebra de linha (mantém os itens em uma única linha) */
     flex-wrap: nowrap; 
-    
-    /* 3. Habilita a rolagem horizontal */
     overflow-x: auto; 
-    overflow-y: hidden; /* Oculta a barra vertical, se aparecer */
-    
-    gap: 20px; /* Espaço entre os cartões */
+    overflow-y: hidden; 
+    gap: 20px; 
     padding-bottom: 20px; 
     
-    /* Remove a barra de rolagem customizada do WebKit (para que a barra nativa apareça) */
-    /* Se você quiser a barra nativa do Chrome/Safari, NÃO defina 'display: none' aqui */
-    /* Se a barra estiver muito grossa, você pode estilizar aqui sem ocultar. */
-    /* Os navegadores IE/Edge/Firefox mostrarão a barra nativa na parte inferior. */
 }
 
 .game-card {
-    /* 4. Flexbox: Define o tamanho e IMPEDE o encolhimento para manter o carrossel */
     flex-basis: 280px; /* Largura base do card */
     height: 500px;
     flex-shrink: 0;    /* IMPEDE o card de encolher: ESSENCIAL para o carrossel */

@@ -5,41 +5,30 @@
 $color-accent: #A2FF01; 
 $color-primary: #FFFFFF;
 
-.app-header {
+.app-header-container {
     background-color: #141414; /* Fundo Preto Principal */
     color: #ffffff;
     height: 64px; 
     padding: 0 20px; 
-    border-bottom: 2px solid $color-accent; /* Linha verde Neon */
+    border-bottom: 2px solid $color-accent; 
 
-    display: flex; /* Garante que os elementos se alinhem */
-    align-items: center;
-    gap: 15px; /* Espaçamento entre os elementos do toolbar */
-}
-
-/* 🚨 CORREÇÃO: Estilizando o novo wrapper */
-.main-nav-wrapper {
+    /* APLICAMOS O FLEXBOX AQUI: Resolver o esmagamento e o desalinhamento */
     display: flex;
     align-items: center;
-    gap: 15px; /* Espaço entre os links */
-    
-    /* Impede que o bloco inteiro de navegação seja esmagado */
-    flex-shrink: 0; 
-    
-    /* Garante que a margem do logo não esmague o primeiro link */
-    margin-left: 20px; 
+    gap: 15px; 
 }
 
+/* 🚨 CORREÇÃO CRÍTICA: Forçar links a serem brancos (aqui resolve o problema de cor) */
+.app-header-container a {
+    color: $color-primary !important;
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.2s ease-in-out;
+    flex-shrink: 0; 
+    white-space: nowrap;
 
-/* 🚨 REGRAS DE VISIBILIDADE FINAL (dentro do wrapper) */
-.main-nav-wrapper a.mat-button {
-    /* Força o texto BRANCO e visível */
-    color: #FFFFFF !important; 
-    
-    /* Outros estilos de hover e active permanecem, mas agora são mais específicos */
-    
     &:hover {
-        color: #A2FF01 !important; 
+        color: $color-accent !important; 
     }
 }
 
@@ -47,43 +36,7 @@ $color-primary: #FFFFFF;
     color: $color-accent; 
     font-size: 1.8em;
     font-weight: bold;
-    text-decoration: none; 
-    flex-shrink: 0; 
     margin-right: 20px; 
-}
-
-/* 🚨 CORREÇÃO CRÍTICA: Estiliza os botões de navegação */
-a.mat-button {
-    /* Força a cor Branca no texto dos botões (resolvendo invisibilidade) */
-    color: $color-primary !important; 
-    
-    /* Garante que o elemento seja tratado como bloco flexível */
-    display: flex !important; 
-    align-items: center;
-    
-    // text-decoration: none;
-    font-weight: 500;
-    padding: 0 10px !important;
-    
-    /* Impedir que o texto quebre ou seja esmagado */
-    white-space: nowrap; 
-    flex-shrink: 0; 
-    transition: color 0.2s ease-in-out;
-
-    &:hover {
-        color: $color-accent !important; 
-    }
-    
-    &.active { 
-        color: $color-accent !important;
-        font-weight: bold;
-    }
-}
-
-/* Garante o espaçamento correto para o ícone de 'Adicionar Jogo' */
-mat-icon.icon-margin {
-    margin-right: 4px;
-    // font-size: 20px;
 }
 
 .spacer {

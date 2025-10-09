@@ -1,0 +1,74 @@
+// /* src/app/shared/layout/layout.scss */
+
+// $color-accent: #A2FF01; 
+// $color-card-bg: #2C2C2C; 
+// $color-white: #FFFFFF;
+// $color-dark: #141414;
+
+// /* ----------------------------------------------------------------- */
+// /* CONTAINER GERAL E SIDEBAR (ESTRUTURA E CORES)                      */
+// /* ----------------------------------------------------------------- */
+
+// .sidenav-container {
+//     height: 100vh;
+//     background-color: $color-dark; 
+// }
+
+// /* Painel Lateral (Menu) */
+// .sidebar-panel {
+//     width: 250px; /* 🚨 FOCO: Defina a largura total para ver o layout primeiro */
+//     background-color: $color-card-bg;
+//     color: $color-white;
+//     padding-top: 20px; /* Adiciona espaço no topo */
+// }
+
+// /* ----------------------------------------------------------------- */
+// /* LINKS DE NAVEGAÇÃO (FORÇANDO O ALINHAMENTO CORRETO)                */
+// /* ----------------------------------------------------------------- */
+
+// /* 🚨 CORREÇÃO CRÍTICA: Aplica estilo específico aos links dentro do sidebar */
+// .sidebar-panel a.mat-button {
+//     /* Ocupa a largura total do painel */
+//     width: 100%;
+    
+//     /* Garante que o ícone e o texto fiquem na mesma linha */
+//     display: flex;
+//     align-items: center;
+    
+//     /* Ajustes visuais */
+//     padding: 12px 10px;
+//     font-weight: 500;
+//     color: $color-white; 
+//     transition: all 0.2s;
+//     border-left: 5px solid transparent; 
+    
+//     /* Estilos do ícone e texto */
+//     mat-icon {
+//         color: $color-accent; 
+//         margin-right: 15px;
+//         flex-shrink: 0; 
+//     }
+    
+//     /* Estilo do link ativo e hover */
+//     &.active-link, &:hover {
+//         background-color: #383838;
+//         border-left-color: $color-accent;
+//         color: $color-accent;
+//     }
+// }
+
+// /* Estilização de outros elementos */
+// .sidebar-logo {
+//     color: $color-accent; 
+//     font-size: 1.5em;
+//     font-weight: bold;
+//     display: block;
+//     padding: 0 10px 20px 10px;
+// }
+
+// .sidebar-logout-btn {
+//     position: absolute; 
+//     bottom: 20px;
+//     left: 10px;
+//     right: 10px;
+// }

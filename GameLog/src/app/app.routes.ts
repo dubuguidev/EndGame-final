@@ -2,6 +2,7 @@
 
 import { Routes } from '@angular/router';
 import { authGuard } from './core/auth.guard'; // 🚨 CORREÇÃO: Usamos o Guard do core
+// import { Layout } from './shared/layout/layout';
 // NOTA: O ofuscamento na linha 4 é um aviso do seu editor, não um erro fatal.
 
 export const routes: Routes = [
@@ -30,6 +31,7 @@ export const routes: Routes = [
     
     {
         path: 'app', // URL principal protegida: /app/dashboard
+        // component: Layout,
         canActivate: [authGuard], 
         children: [
             
