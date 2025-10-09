@@ -1,5 +1,5 @@
 <div class="game-list-container">
-    <h2>Jogos</h2>
+    <h2>Meus Jogos</h2>
 
     <mat-tab-group mat-align-tabs="start" class="game-tabs">
 
@@ -37,9 +37,23 @@
                 <ng-container *ngIf="playingGames$ | async as games">
                     <div *ngFor="let game of games" class="game-item-row">
                         <img [src]="game.imageUrl" alt="{{ game.title }} Cover" class="game-list-image">
+                        
                         <div class="game-item-details">
                             <h3 class="game-title">{{ game.title }}</h3>
-                            </div>
+                            <p class="game-info">{{ game.platform }} ({{ game.genre }})</p>
+
+                            <mat-progress-bar mode="determinate" [value]="game.progress"></mat-progress-bar>
+                            <p class="progress-text">Progresso: {{ game.progress }}%</p>
+                        </div>
+                        
+                        <div class="game-actions">
+                            <button mat-icon-button (click)="viewDetails(game.id)">
+                                <mat-icon>visibility</mat-icon>
+                            </button>
+                            <button mat-icon-button (click)="editGame(game.id)">
+                                <mat-icon>edit</mat-icon>
+                            </button>
+                        </div>
                     </div>
                     <p *ngIf="games.length === 0" class="empty-list-message">Nenhum jogo em andamento.</p>
                 </ng-container>
@@ -51,9 +65,23 @@
                 <ng-container *ngIf="toPlayGames$ | async as games">
                     <div *ngFor="let game of games" class="game-item-row">
                         <img [src]="game.imageUrl" alt="{{ game.title }} Cover" class="game-list-image">
+                        
                         <div class="game-item-details">
                             <h3 class="game-title">{{ game.title }}</h3>
-                            </div>
+                            <p class="game-info">{{ game.platform }} ({{ game.genre }})</p>
+                            
+                            <mat-progress-bar mode="determinate" [value]="game.progress"></mat-progress-bar>
+                            <p class="progress-text">Progresso: {{ game.progress }}%</p>
+                        </div>
+                        
+                        <div class="game-actions">
+                            <button mat-icon-button (click)="viewDetails(game.id)">
+                                <mat-icon>visibility</mat-icon>
+                            </button>
+                            <button mat-icon-button (click)="editGame(game.id)">
+                                <mat-icon>edit</mat-icon>
+                            </button>
+                        </div>
                     </div>
                     <p *ngIf="games.length === 0" class="empty-list-message">Nenhum jogo na lista de desejos.</p>
                 </ng-container>

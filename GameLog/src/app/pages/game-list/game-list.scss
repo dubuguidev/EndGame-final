@@ -1,99 +1,126 @@
+$color-accent: #A2FF01;      // Verde Neon
+$color-text-primary: #FFFFFF; // Branco
+$color-text-secondary: #a0a0a0; // Cinza claro
+$bg-primary: #121212;        // Fundo principal da página
+$bg-secondary: #1e1e1e;       // Fundo dos itens da lista
+$border-color: #2c2c2c;      // Cor da borda sutil
+
+// Container principal da lista
 .game-list-container {
-    padding: 20px;
+  padding: 24px;
 }
 
+// Título da página
 h2 {
-    color: #ffffff;
-    margin-bottom: 20px;
+  color: $color-text-primary;
+  font-size: 2em;
+  font-weight: bold;
+  margin-bottom: 24px;
+  border-left: 4px solid $color-accent;
+  padding-left: 15px;
+}
+
+// Estilização das Abas (Tabs) para combinar com o tema escuro
+::ng-deep .game-tabs {
+  .mat-mdc-tab-header {
+    background-color: transparent;
+  }
+  .mat-mdc-tab-label {
+    color: $color-text-secondary;
+    font-weight: 500;
+  }
+  .mat-mdc-tab-label.mdc-tab--active {
+    color: $color-accent !important;
+  }
+  .mat-mdc-ink-bar {
+    background-color: $color-accent !important;
+  }
+}
+
+.tab-content {
+  padding-top: 24px;
+}
+
+// Estilo para cada linha de jogo na lista
+.game-item-row {
+  display: flex;
+  align-items: center;
+  background-color: $bg-secondary;
+  padding: 16px;
+  border-radius: 8px;
+  margin-bottom: 16px;
+  border: 1px solid $border-color;
+  transition: background-color 0.2s ease-in-out, border-color 0.2s ease-in-out;
+
+  &:hover {
+    background-color: darken($bg-secondary, 3%);
+    border-color: $color-accent;
+  }
+}
+
+// Imagem (Thumbnail)
+.game-list-image {
+  width: 60px;
+  height: 90px;
+  object-fit: cover;
+  margin-right: 20px;
+  border-radius: 4px;
+  flex-shrink: 0; // Impede que a imagem encolha
+}
+
+// Detalhes do jogo (texto)
+.game-item-details {
+  flex-grow: 1;
+  color: $color-text-primary;
+
+  .game-title {
+    font-size: 1.2em;
+    font-weight: bold;
+    margin: 0 0 5px 0;
+  }
+  .game-info {
+    font-size: 0.9em;
+    color: $color-text-secondary;
+    margin: 0 0 10px 0;
+  }
+  .progress-text {
+    font-size: 0.85em;
+    color: $color-text-secondary;
+    margin-top: 5px;
+  }
+}
+
+// Barra de Progresso
+mat-progress-bar {
+  height: 6px;
+  border-radius: 3px;
+  margin-bottom: 5px;
+  // Cor da barra de progresso
+  --mdc-linear-progress-active-indicator-color: #{$color-accent};
+}
+
+// Botões de Ação (Editar, Excluir, etc.)
+.game-actions {
+  display: flex;
+  gap: 10px;
+
+  button {
+    color: $color-text-secondary;
+    transition: color 0.2s ease-in-out;
+    &:hover {
+      color: $color-accent;
+    }
+  }
+}
+
+// Mensagem para quando a lista está vazia
+.empty-list-message {
+  color: $color-text-secondary;
+  text-align: center;
+  padding: 40px 0;
+  font-size: 1.1em;
 }
 
 .game-tabs {
-    /* Cor de fundo das abas (Material Design) */
-    background-color: transparent; 
-}
-
-/* Estiliza o conteúdo da aba */
-.tab-content {
-    padding: 15px 0;
-}
-
-/* Estilo para cada linha de jogo na lista */
-.game-item-row {
-    display: flex;
-    align-items: center; /* Alinha verticalmente imagem e texto */
-    padding: 15px 0;
-    border-bottom: 1px solid #282828; /* Separador sutil */
-    
-    &:last-child {
-        border-bottom: none; /* Remove a linha do último item */
-    }
-}
-
-/* Estilo da miniatura da Imagem */
-.game-list-image {
-    width: 60px;  /* Largura padronizada para miniatura */
-    height: 90px; /* Altura padronizada para miniatura (proporção de capa) */
-    object-fit: cover;
-    margin-right: 20px; /* Espaçamento com o texto */
-    border-radius: 4px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
-}
-
-.game-item-details {
-    flex-grow: 1; /* Ocupa o máximo de espaço possível */
-    color: #ffffff;
-
-    .game-title {
-        font-size: 1.1em;
-        font-weight: bold;
-        margin: 0 0 5px 0;
-    }
-    .game-info {
-        font-size: 0.9em;
-        color: #a0a0a0;
-        margin: 0 0 10px 0;
-    }
-    .progress-text {
-        font-size: 0.85em;
-        color: #2ecc71;
-        margin-top: 5px;
-    }
-}
-
-/* Estilo da barra de progresso do Material */
-mat-progress-bar {
-    height: 6px;
-    border-radius: 3px;
-    margin-bottom: 5px;
-}
-
-.game-actions {
-    display: flex;
-    gap: 5px;
-    
-    button {
-        color: #2ecc71;
-    }
-}
-
-.empty-list-message {
-    color: #a0a0a0;
-    text-align: center;
-    padding: 30px 0;
-}
-
-/* src/app/pages/game-list/game-list.scss (Trecho Essencial) */
-
-.game-list-image {
-    width: 60px;  /* Largura padronizada */
-    height: 90px; /* Altura padronizada (se estiver em 0px, não aparece) */
-    object-fit: cover;
-    margin-right: 20px; 
-    border-radius: 4px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
-}
-
-.game-item-row {
-    display: flex;
-    align-items: center; 
+    font-weight: bold;
 }
