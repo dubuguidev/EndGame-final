@@ -1,14 +1,16 @@
 <mat-toolbar class="app-header">
+    
     <div class="logo">
         <a routerLink="/app/dashboard">EndGame</a>
     </div>
 
-    <a mat-button routerLink="/app/dashboard" routerLinkActive="active">Dashboard</a>
-    <a mat-button routerLink="/app/meus-jogos" routerLinkActive="active">Meus Jogos</a>
-    
-    <a mat-button routerLink="/app/adicionar-jogo" routerLinkActive="active">
-        <mat-icon class="icon-margin">add</mat-icon> Adicionar Jogo
-    </a>
+    <div class="main-nav-wrapper">
+        <a mat-button routerLink="/app/dashboard" routerLinkActive="active">Dashboard</a>
+        <a mat-button routerLink="/app/meus-jogos" routerLinkActive="active">Meus Jogos</a>
+        <a mat-button routerLink="/app/adicionar-jogo" routerLinkActive="active">
+            <mat-icon class="icon-margin">add</mat-icon> Adicionar Jogo
+        </a>
+    </div>
 
     <span class="spacer"></span> 
     

@@ -1,87 +1,98 @@
+/* src/app/shared/header/header.scss */
+
 @use "sass:color"; 
 
+$color-accent: #A2FF01; 
+$color-primary: #FFFFFF;
+
 .app-header {
-    background-color: #f8f8f8; /* Fundo Preto Principal */
+    background-color: #141414; /* Fundo Preto Principal */
     color: #ffffff;
     height: 64px; 
     padding: 0 20px; 
-    border-bottom: 2px solid #A2FF01; /* Linha verde Neon */
+    border-bottom: 2px solid $color-accent; /* Linha verde Neon */
+
+    display: flex; /* Garante que os elementos se alinhem */
+    align-items: center;
+    gap: 15px; /* Espaçamento entre os elementos do toolbar */
+}
+
+/* 🚨 CORREÇÃO: Estilizando o novo wrapper */
+.main-nav-wrapper {
     display: flex;
     align-items: center;
-    gap: 15px;
+    gap: 15px; /* Espaço entre os links */
+    
+    /* Impede que o bloco inteiro de navegação seja esmagado */
+    flex-shrink: 0; 
+    
+    /* Garante que a margem do logo não esmague o primeiro link */
+    margin-left: 20px; 
+}
+
+
+/* 🚨 REGRAS DE VISIBILIDADE FINAL (dentro do wrapper) */
+.main-nav-wrapper a.mat-button {
+    /* Força o texto BRANCO e visível */
+    color: #FFFFFF !important; 
+    
+    /* Outros estilos de hover e active permanecem, mas agora são mais específicos */
+    
+    &:hover {
+        color: #A2FF01 !important; 
+    }
 }
 
 .logo a {
-    color: #A2FF01; /* Cor Verde Neon para o logo */
+    color: $color-accent; 
     font-size: 1.8em;
     font-weight: bold;
     text-decoration: none; 
-    margin-right: 30px;
+    flex-shrink: 0; 
+    margin-right: 20px; 
 }
 
-// .main-nav {
-//     display: flex;
-//     gap: 15px;
-//     flex-shrink: 0; 
-    
-//     a {
-//         color: #ffffff; /* Cor padrão dos links */
-//         text-decoration: none;
-//         font-weight: 500;
-//         padding: 0 10px;
-//         white-space: nowrap;
-//         transition: color 0.2s ease-in-out;
-
-//         &:hover {
-//             color: #A2FF01; /* Verde Neon no hover */
-//         }
-        
-//         &.active { 
-//             color: #A2FF01;
-//             font-weight: bold;
-//         }
-
-//         mat-icon {
-//             margin-right: 5px;
-//         }
-//     }
-// }
-
-.spacer {
-    flex: 1 1 auto; /* Pressiona os elementos seguintes (Botão Sair) para a direita */
-}
-
-/* 🚨 REGRAS PARA LINKS DIRETOS NO TOOLBAR */
+/* 🚨 CORREÇÃO CRÍTICA: Estiliza os botões de navegação */
 a.mat-button {
-    color: #ffffff; 
-    text-decoration: none;
+    /* Força a cor Branca no texto dos botões (resolvendo invisibilidade) */
+    color: $color-primary !important; 
+    
+    /* Garante que o elemento seja tratado como bloco flexível */
+    display: flex !important; 
+    align-items: center;
+    
+    // text-decoration: none;
     font-weight: 500;
-    padding: 0 10px;
+    padding: 0 10px !important;
     
     /* Impedir que o texto quebre ou seja esmagado */
     white-space: nowrap; 
-    flex-shrink: 0;
-    transition: color 0.2s ease-in-out; 
+    flex-shrink: 0; 
+    transition: color 0.2s ease-in-out;
 
     &:hover {
-        color: #A2FF01;
+        color: $color-accent !important; 
     }
     
     &.active { 
-        color: #A2FF01;
+        color: $color-accent !important;
         font-weight: bold;
     }
 }
 
+/* Garante o espaçamento correto para o ícone de 'Adicionar Jogo' */
 mat-icon.icon-margin {
-    margin-right: 4px !important; 
+    margin-right: 4px;
+    // font-size: 20px;
 }
 
-/* ----------------------------------------------------------------- */
-/* BOTÃO DE SAIR (VERMELHO)                                          */
-/* ----------------------------------------------------------------- */
+.spacer {
+    flex: 1 1 auto; 
+}
+
+/* Estilo do botão Sair (warn) */
 button[color="warn"] {
-    background-color: #f33446 !important; /* Vermelho Padrão do Material */
+    background-color: #f44336 !important; 
     color: #ffffff !important;
     font-weight: bold;
     padding: 0 20px;
@@ -90,8 +101,7 @@ button[color="warn"] {
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
 
     &:hover {
-        /* Escurece a cor usando color.adjust */
-        background-color: color.adjust(#f33446, $lightness: -20%) !important; 
+        background-color: color.adjust(#f44336, $lightness: -5%) !important; 
         transform: translateY(-1px);
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
     }
