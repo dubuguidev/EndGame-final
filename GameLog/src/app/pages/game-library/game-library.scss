@@ -27,6 +27,7 @@
 .game-card {
     /* 4. Flexbox: Define o tamanho e IMPEDE o encolhimento para manter o carrossel */
     flex-basis: 280px; /* Largura base do card */
+    height: 500px;
     flex-shrink: 0;    /* IMPEDE o card de encolher: ESSENCIAL para o carrossel */
     flex-grow: 0;      /* Impede o card de crescer */
     width: 280px;      /* Largura fixa do card */

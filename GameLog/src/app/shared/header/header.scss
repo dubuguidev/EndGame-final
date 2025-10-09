@@ -1,14 +1,14 @@
-/* src/app/core/header/header.scss */
-
-// Importa o módulo color para usar color.adjust (resolvendo o aviso de depreciação do SASS)
 @use "sass:color"; 
 
 .app-header {
-    background-color: #141414; /* Fundo Preto Principal */
+    background-color: #f8f8f8; /* Fundo Preto Principal */
     color: #ffffff;
     height: 64px; 
     padding: 0 20px; 
     border-bottom: 2px solid #A2FF01; /* Linha verde Neon */
+    display: flex;
+    align-items: center;
+    gap: 15px;
 }
 
 .logo a {
@@ -19,42 +19,70 @@
     margin-right: 30px;
 }
 
-.main-nav {
-    display: flex;
-    gap: 15px; 
+// .main-nav {
+//     display: flex;
+//     gap: 15px;
+//     flex-shrink: 0; 
     
-    a {
-        color: #ffffff; /* Cor padrão dos links */
-        text-decoration: none;
-        font-weight: 500;
-        padding: 0 10px;
-        transition: color 0.2s ease-in-out;
+//     a {
+//         color: #ffffff; /* Cor padrão dos links */
+//         text-decoration: none;
+//         font-weight: 500;
+//         padding: 0 10px;
+//         white-space: nowrap;
+//         transition: color 0.2s ease-in-out;
 
-        &:hover {
-            color: #A2FF01; /* Verde Neon no hover */
-        }
+//         &:hover {
+//             color: #A2FF01; /* Verde Neon no hover */
+//         }
         
-        &.active { 
-            color: #A2FF01;
-            font-weight: bold;
-        }
+//         &.active { 
+//             color: #A2FF01;
+//             font-weight: bold;
+//         }
 
-        mat-icon {
-            margin-right: 5px;
-        }
-    }
-}
+//         mat-icon {
+//             margin-right: 5px;
+//         }
+//     }
+// }
 
 .spacer {
     flex: 1 1 auto; /* Pressiona os elementos seguintes (Botão Sair) para a direita */
+}
+
+/* 🚨 REGRAS PARA LINKS DIRETOS NO TOOLBAR */
+a.mat-button {
+    color: #ffffff; 
+    text-decoration: none;
+    font-weight: 500;
+    padding: 0 10px;
+    
+    /* Impedir que o texto quebre ou seja esmagado */
+    white-space: nowrap; 
+    flex-shrink: 0;
+    transition: color 0.2s ease-in-out; 
+
+    &:hover {
+        color: #A2FF01;
+    }
+    
+    &.active { 
+        color: #A2FF01;
+        font-weight: bold;
+    }
+}
+
+mat-icon.icon-margin {
+    margin-right: 4px !important; 
 }
 
 /* ----------------------------------------------------------------- */
 /* BOTÃO DE SAIR (VERMELHO)                                          */
 /* ----------------------------------------------------------------- */
 button[color="warn"] {
-    background-color: #A2FF01 !important; /* Vermelho Padrão do Material */
-    color: #000000 !important;
+    background-color: #f33446 !important; /* Vermelho Padrão do Material */
+    color: #ffffff !important;
     font-weight: bold;
     padding: 0 20px;
     height: 40px;
@@ -63,7 +91,7 @@ button[color="warn"] {
 
     &:hover {
         /* Escurece a cor usando color.adjust */
-        background-color: color.adjust(#A2FF01, $lightness: -20%) !important; 
+        background-color: color.adjust(#f33446, $lightness: -20%) !important; 
         transform: translateY(-1px);
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
     }

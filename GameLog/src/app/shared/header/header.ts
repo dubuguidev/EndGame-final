@@ -1,16 +1,13 @@
-// src/app/core/header/header.ts
+// src/app/shared/header/header.ts
 
 import { Component } from '@angular/core';
 import { Router, RouterModule } from '@angular/router'; 
 import { CommonModule } from '@angular/common'; 
-
-// Módulos do Material
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
+import { AuthService } from '../../core/auth.service'; 
 
-// Chave consistente para armazenamento do token
-const AUTH_TOKEN_KEY = 'auth_token'; 
 
 @Component({
   selector: 'app-header',
@@ -25,23 +22,15 @@ const AUTH_TOKEN_KEY = 'auth_token';
   templateUrl: './header.html',
   styleUrls: ['./header.scss']
 })
-export class Header { // Mantendo o padrão de classe sem sufixo
+export class Header {
 
   constructor(
     private router: Router,
+    private readonly authService: AuthService 
   ) { }
 
   logout(): void {
-    // ----------------------------------------------------
-    // LÓGICA DE REMOÇÃO DO TOKEN
-    // ----------------------------------------------------
-    
-    // 1. REMOVE O TOKEN DO LOCAL STORAGE (Encerra a persistência)
-    localStorage.removeItem(AUTH_TOKEN_KEY); 
-    
-    console.log('Usuário deslogado! Redirecionando para login.');
-    
-    // 2. Redireciona para a página de login
-    this.router.navigate(['/login']); 
+    this.authService.logout();
+    this.router.navigate(['/login']);
   }
 }

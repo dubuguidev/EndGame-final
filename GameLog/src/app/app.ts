@@ -1,29 +1,27 @@
 // src/app/app.ts
 
 import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
-import { CommonModule } from '@angular/common'; // <-- Importe explicitamente aqui
-import { Header } from './shared/header/header';
-import { AuthService } from './core/auth.service';
-import { Observable } from 'rxjs';
+import { RouterOutlet } from '@angular/router'; 
+import { Header } from './shared/header/header'; // O nome do seu Header
+import { CommonModule } from '@angular/common'; // Para o *ngIf
+import { AuthService } from './core/auth.service'; // Para saber o estado do login
+import { Observable } from 'rxjs'; 
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [
-    // Certifique-se que CommonModule está na lista:
-    CommonModule,     // <--- ESSENCIAL! Resolve o erro 'async' (NG0302)
-    RouterOutlet,
-    Header
-  ],
+  // 🚨 ATUALIZAÇÃO: Incluir o HeaderComponent e o CommonModule
+  imports: [RouterOutlet, Header, CommonModule], 
   templateUrl: './app.html',
   styleUrls: ['./app.scss']
 })
 export class App {
-  title = 'Gamelog';
-  isLoggedIn$: Observable<boolean>; // Está sendo usado no template do header
+  
+  // Variável para rastrear o estado de login
+  isLoggedIn$: Observable<boolean>; 
 
   constructor(private authService: AuthService) {
+    // Observa o estado de login para decidir se mostra o Header
     this.isLoggedIn$ = this.authService.isLoggedIn$;
   }
 }
