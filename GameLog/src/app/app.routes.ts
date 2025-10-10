@@ -51,11 +51,11 @@ export const routes: Routes = [
             { 
                 path: 'adicionar-jogo', 
                 canActivate: [authGuard],
-                loadComponent: () => import('./pages/game-form/game-form').then(c => c.GameForm) 
+                loadComponent: () => import('./pages/game-form/game-form').then(c => c.GameFormComponent) 
             },
             { 
                 path: 'adicionar-jogo/:id', 
-                loadComponent: () => import('./pages/game-form/game-form').then(c => c.GameForm) 
+                loadComponent: () => import('./pages/game-form/game-form').then(c => c.GameFormComponent) 
             },
             
             // Detalhes do Jogo

@@ -1,75 +1,166 @@
+/* src/app/pages/game-form/game-form.scss */
+
+/* --- PALETA DE CORES DEFINITIVA (COMPLETA) --- */
+$color-dark: #141414;        /* Fundo Principal (Preto Escuro) */
+$color-surface: #2C2C2C;     /* Fundo Secundário (Container do Formulário) */
+$color-accent: #A2FF01;      /* Verde Neon (Foco/Primário) */
+$color-accent-dark: #7ac000; /* Verde Escuro para Gradiente */
+$color-text-primary: #FFFFFF;   /* Texto Principal */
+$color-text-secondary: #B0B0B0; /* Cinza Suave para Labels */
+
+// 🚨 CORREÇÃO: Definindo a variável faltante
+$color-text: #030303;        /* Cor do texto nos botões (Preto) */
+
+
+/* --- VARIÁVEIS DE GLASSMORFISMO (Fosco no fundo escuro) --- */
+$glass-bg: rgba(67, 67, 67, 0.4); 
+$glass-border: rgba(162, 255, 1, 0.3); 
+
+
+// Container principal do formulário
 .form-container {
-    padding: 30px;
-    max-width: 900px; /* Limita a largura para melhor leitura */
-    margin: 40px auto; /* Centraliza o formulário */
-    background-color: #141414; 
-    color: #ffffff;
+  max-width: 900px;
+  margin: 40px auto;
+  padding: 40px;
+  
+  /* Aplicando o Vidro Fosco (Glassmorphism) */
+  background: $glass-bg;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-radius: 16px;
+  border: 1px solid $glass-border; 
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.6); 
 }
 
+// Títulos
 h2 {
-    color: #ffffff;
-    margin-bottom: 5px;
-    font-size: 2em;
+  color: $color-text-primary;
+  margin-bottom: 8px;
+  font-size: 2.4em;
+  font-weight: 700;
 }
-
 .subtitle {
-    color: #A2FF01; /* Usa a cor de destaque */
-    margin-bottom: 30px;
-    font-size: 1.1em;
+  color: $color-text-secondary;
+  margin-bottom: 40px;
+  font-size: 1.1em;
+  font-weight: 300;
+  letter-spacing: 0.5px;
 }
 
+// Grid para campos menores
 .form-grid {
-    display: grid;
-    /* 3 colunas, com gap de 20px */
-    grid-template-columns: repeat(3, 1fr); 
-    gap: 20px;
-    margin-bottom: 20px;
-    
-    .full-width {
-        grid-column: span 3; /* Ocupa as 3 colunas */
-    }
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 24px;
 }
 
+// Classe para campos de largura total
+.full-width-field {
+  width: 100%;
+  margin-top: 24px;
+}
+
+/* ----------------------------------------------------------------- */
+/* --- Customização Impecável dos Componentes Material ---            */
+/* ----------------------------------------------------------------- */
+
+::ng-deep .mat-mdc-form-field {
+  
+  input.mat-mdc-input-element, 
+  textarea.mat-mdc-input-element,
+  .mat-mdc-select-value {
+    color: $color-text-primary !important;
+    letter-spacing: 0.5px !important;
+  }
+  
+  .mat-mdc-text-field-wrapper {
+    background-color: rgba(0, 0, 0, 0.2);
+    border-radius: 8px 8px 0 0;
+  }
+  
+  .mat-mdc-select-value, input.mat-mdc-input-element {
+    color: $color-text-primary;
+  }
+  .mdc-floating-label {
+    color: $color-text-secondary;
+  }
+  .mdc-notched-outline {
+    border-color: transparent !important;
+  }
+  .mat-mdc-form-field-underline {
+    border-color: $glass-border;
+  }
+  
+  &.mat-focused {
+    .mdc-floating-label {
+      color: $color-accent !important;
+    }
+    .mat-mdc-form-field-ripple {
+      background-color: $color-accent !important;
+    }
+  }
+}
+
+/* Slider */
 .progress-section {
-    padding: 10px 0;
-    margin-bottom: 20px;
-    
-    mat-label {
-        color: #A2FF01;
-        font-weight: bold;
-    }
-    
-    mat-slider {
-        width: 100%;
-        margin-top: 10px;
-    }
+  .progress-label {
+    color: $color-text-secondary;
+    font-weight: 500;
+    margin-bottom: 16px;
+    display: block;
+  }
+}
+::ng-deep mat-slider {
+  width: 100%;
+  .mdc-slider__track--active_fill {
+    border-color: $color-accent !important;
+  }
+  .mdc-slider__thumb-knob {
+    background-color: $color-accent !important;
+    border-color: $color-accent !important;
+  }
 }
 
-.full-width {
-    width: 100%;
-}
-
+/* Área dos Botões */
 .button-actions {
-    display: flex;
-    justify-content: flex-end; /* Alinha os botões à direita */
-    gap: 15px;
-    margin-top: 30px;
-    
-    .button {
-        padding: 0 30px;
-        height: 48px;
+  display: flex;
+  justify-content: flex-end;
+  gap: 16px;
+  margin-top: 40px;
+
+  button {
+    padding: 0 32px;
+    height: 48px;
+    font-weight: bold;
+    border-radius: 12px;
+    border: none;
+    transition: all 0.3s ease;
+  }
+
+  // Botão Secundário (Cancelar)
+  button:not([mat-raised-button]) {
+    background-color: transparent;
+    border: 1px solid $glass-border;
+    color: $color-text-secondary;
+
+    &:hover {
+      background-color: $glass-bg;
+      color: $color-text-primary;
+      border-color: $color-accent;
     }
-    
-    /* Estilo específico para o botão Cancelar (secundário) */
-    .mat-button {
-        color: #A2FF01 !important; 
-        border: 1px solid #434343;
-        background: transparent !important;
-        box-shadow: none !important;
-        
-        &:hover {
-            border-color: #A2FF01;
-            transform: none; /* Não move o cancelar */
-        }
+  }
+  
+  // Botão Primário (Salvar) - Com Gradiente e Sombra Aprimorada
+  button[mat-raised-button] {
+    /* 🚨 CORREÇÃO: Usando a variável definida no topo */
+    color: $color-text !important; /* Texto Preto */
+    background: linear-gradient(45deg, $color-accent-dark, $color-accent);
+
+    box-shadow: 0 4px 20px rgba($color-accent, 0.4); 
+
+    &:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 30px rgba($color-accent, 0.5);
     }
+  }
 }

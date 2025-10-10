@@ -1,76 +1,69 @@
 <div class="form-container">
-    <h2>Adicionar Jogos</h2>
-    <p class="subtitle">Gerencie seu progresso e detalhes do jogo.</p>
+  <mat-card class="game-form-card">
+    <mat-card-header>
+      <mat-card-title>
+        <h2>Adicionar Novo Jogo</h2>
+        <p class="subtitle">Preencha os detalhes do jogo que você quer registrar.</p>
+      </mat-card-title>
+    </mat-card-header>
 
-    <form [formGroup]="gameForm" (ngSubmit)="onSubmit()">
-        
+    <mat-card-content>
+      <form [formGroup]="gameForm">
         <div class="form-grid">
-            
-            <mat-form-field appearance="outline">
-                <mat-label>Título</mat-label>
-                <input matInput formControlName="title">
-            </mat-form-field>
-            
-            <mat-form-field appearance="outline">
-                <mat-label>Plataforma</mat-label>
-                <input matInput formControlName="platform">
-            </mat-form-field>
+          <mat-form-field appearance="outline">
+            <mat-label>Título do Jogo</mat-label>
+            <input matInput formControlName="title">
+          </mat-form-field>
 
-            <mat-form-field appearance="outline">
-                <mat-label>Gênero</mat-label>
-                <input matInput formControlName="genre">
-            </mat-form-field>
+          <mat-form-field appearance="outline">
+            <mat-label>Plataforma</mat-label>
+            <input matInput formControlName="platform">
+          </mat-form-field>
 
-            <mat-form-field appearance="outline">
-                <mat-label>Status</mat-label>
-                <mat-select formControlName="status">
-                    <mat-option value="Quero jogar">Quero jogar</mat-option>
-                    <mat-option value="Tô jogando">Tô jogando</mat-option>
-                    <mat-option value="Terminado">Terminado</mat-option>
-                </mat-select>
-            </mat-form-field>
+          <mat-form-field appearance="outline">
+            <mat-label>Gênero</mat-label>
+            <input matInput formControlName="genre">
+          </mat-form-field>
 
-            <mat-form-field appearance="outline">
-                <mat-label>Horas para Terminar (h)</mat-label>
-                <input matInput type="number" formControlName="hoursToBeat">
-            </mat-form-field>
-            
-            <mat-form-field appearance="outline">
-                <mat-label>Sua Nota (1-5)</mat-label>
-                <input matInput type="number" formControlName="rating">
-            </mat-form-field>
-
-            <mat-form-field appearance="outline" class="full-width">
-                <mat-label>URL da Imagem da Capa</mat-label>
-                <input matInput formControlName="imageUrl">
-            </mat-form-field>
-            
+          <mat-form-field appearance="outline">
+            <mat-label>Status</mat-label>
+            <mat-select formControlName="status">
+              <mat-option value="Playing">Jogando</mat-option>
+              <mat-option value="To Play">Para Jogar</mat-option>
+              <mat-option value="Played">Jogado</mat-option>
+            </mat-select>
+          </mat-form-field>
         </div>
-        
-        <div class="progress-section">
-            <mat-label>Progresso de Conclusão: {{ gameForm.get('progress')?.value || 0 }}%</mat-label>
-            <mat-slider
-                min="0"
-                max="100"
-                step="1"
-                thumbLabel
-                formControlName="progress"
-                color="primary">
-                </mat-slider>
-        </div>
-        
-        <mat-form-field appearance="outline" class="full-width">
-            <mat-label>Notas e Comentários</mat-label>
-            <textarea matInput formControlName="notes" rows="3"></textarea>
+
+        <mat-form-field appearance="outline" class="full-width-field">
+            <mat-label>URL da Capa</mat-label>
+            <input matInput formControlName="coverUrl">
         </mat-form-field>
 
-        <div class="button-actions">
-            <button mat-raised-button color="primary" type="submit" [disabled]="!gameForm.valid">
-                Salvar Jogo
-            </button>
-            <button mat-button type="button" (click)="onCancel()">
-                Cancelar
-            </button>
+        <div class="progress-section full-width-field">
+          <label class="progress-label">Progresso: {{ gameForm.get('progress')?.value }}%</label>
+          <mat-slider min="0" max="100" step="1" discrete>
+            <input matSliderThumb formControlName="progress">
+          </mat-slider>
         </div>
-    </form>
+
+        <mat-form-field appearance="outline" class="full-width-field">
+          <mat-label>Comentários</mat-label>
+          <textarea matInput
+                    formControlName="notes"
+                    cdkTextareaAutosize
+                    #autosize="cdkTextareaAutosize"
+                    cdkAutosizeMinRows="3"
+                    cdkAutosizeMaxRows="8"></textarea>
+        </mat-form-field>
+
+      </form>
+    </mat-card-content>
+    
+    <mat-card-actions class="button-actions">
+      <button mat-stroked-button class="cancel-button" (click)="onCancel()">Cancelar</button>
+      <button mat-raised-button class="save-button" (click)="onSubmit()">Salvar Jogo</button>
+    </mat-card-actions>
+    
+  </mat-card>
 </div>

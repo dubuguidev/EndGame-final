@@ -7,15 +7,15 @@
 //     height: 0;
 
 
-body {
-    // -ms-overflow-style:none; /* IE and Edge */
-    // scrollbar-width:12px;  /* Firefox */
-    // overflow-y:visible;     /* Garante que o overflow vertical seja escondido */
-    
-    /* Aplica a cor de fundo principal e texto */
-    background-color: #141414; /* Fundo Preto Escuro */
-    color: #ffffff; /* Texto Branco */
-    font-family: 'Roboto', sans-serif; 
+body { 
+  height: 100%;
+  margin: 0;
+  font-family: 'Inter', sans-serif; // Usando a fonte que você escolheu
+  
+  // Gradiente sutil para dar profundidade ao efeito de vidro
+  background-color: #121212;
+  background-image: radial-gradient(circle at 1% 1%, rgba(162, 255, 1, 0.1), rgba(162, 255, 1, 0) 25%),
+                    radial-gradient(circle at 99% 99%, rgba(162, 255, 1, 0.1), rgba(162, 255, 1, 0) 25%);
 }
 
 body::-webkit-scrollbar {

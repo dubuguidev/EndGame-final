@@ -1,78 +1,63 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
-import { Router } from '@angular/router'; // Importa o Router
+import { FormBuilder, FormGroup } from '@angular/forms'; // Removido imports não usados
+import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
+import { ReactiveFormsModule } from '@angular/forms';
 
+// Imports do Material
+import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
-import { MatSelectModule } from '@angular/material/select';
 import { MatButtonModule } from '@angular/material/button';
-import { MatSliderModule } from '@angular/material/slider'; 
-import { MatIconModule } from '@angular/material/icon'; 
-
-import { GameService } from '../../core/game.service'; // Ajuste o caminho conforme sua estrutura
-import { Game } from '../../models/game.model'; // Ajuste o caminho conforme sua estrutura
-
+import { MatSelectModule } from '@angular/material/select';
+import { MatSliderModule } from '@angular/material/slider';
+import { TextFieldModule } from '@angular/cdk/text-field'; // <-- IMPORTANTE para o textarea auto-ajustável
 
 @Component({
   selector: 'app-game-form',
   standalone: true,
   imports: [
-    CommonModule, 
-    ReactiveFormsModule, 
-    MatFormFieldModule, 
-    MatInputModule, 
-    MatSelectModule, 
-    MatButtonModule, 
-    MatSliderModule, 
-    MatIconModule
+    CommonModule,
+    ReactiveFormsModule,
+    MatCardModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatButtonModule,
+    MatSelectModule,
+    MatSliderModule,
+    TextFieldModule // <-- Adicionar aqui
   ],
   templateUrl: './game-form.html',
   styleUrls: ['./game-form.scss']
 })
-export class GameForm implements OnInit { // <-- Classe sem o sufixo 'Component'
-
+export class GameFormComponent implements OnInit {
   gameForm!: FormGroup;
 
   constructor(
     private fb: FormBuilder,
-    private gameService: GameService,
-    private router: Router // Injeção do Router para navegação
-  ) {
-    this.initForm();
-  }
+    private router: Router
+    // Adicione seus serviços aqui (ex: GameService)
+  ) {}
 
   ngOnInit(): void {
-    // const id = this.route.snapshot.paramMap.get('id');
-    //   if (id) { this.loadGameForEdit(id); 
-  }
-
-  private initForm(): void {
     this.gameForm = this.fb.group({
-      id: [null], // Campo oculto para ID (necessário para salvar/editar)
-      title: ['', Validators.required],
-      platform: ['', Validators.required],
+      title: [''],
+      platform: [''],
       genre: [''],
-      status: ['Quero jogar', Validators.required],
-      progress: [0, Validators.min(0)],
-      hoursPlayed: [0, Validators.min(0)],
-      rating: [null],
-      hoursToBeat: [null],
-      notes: [''],
-      imageUrl: [''], // Campo adicionado no HTML
+      status: [''],
+      coverUrl: [''],
+      progress: [0],
+      notes: [''] // <-- NOVO CAMPO ADICIONADO AQUI
     });
   }
 
   onSubmit(): void {
-    if (this.gameForm.valid) {
-      const game: Game = this.gameForm.value;
-      this.gameService.saveGame(game);
-      
-      this.router.navigate(['/meus-jogos']); 
-    }
+    // Sua lógica para salvar
+    console.log(this.gameForm.value);
   }
 
   onCancel(): void {
-    this.router.navigate(['/meus-jogos']); 
+    // Sua lógica para cancelar
+    this.router.navigate(['/games']);
   }
 }

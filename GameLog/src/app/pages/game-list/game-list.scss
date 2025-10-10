@@ -12,7 +12,7 @@ $border-color: #2c2c2c;      // Cor da borda sutil
 
 // Título da página
 h2 {
-  color: $color-text-primary;
+  color: $color-accent;
   font-size: 2em;
   font-weight: bold;
   margin-bottom: 24px;
@@ -80,12 +80,12 @@ h2 {
   }
   .game-info {
     font-size: 0.9em;
-    color: $color-text-secondary;
+    color: $color-text-primary;
     margin: 0 0 10px 0;
   }
   .progress-text {
     font-size: 0.85em;
-    color: $color-text-secondary;
+    color: $color-text-primary;
     margin-top: 5px;
   }
 }
