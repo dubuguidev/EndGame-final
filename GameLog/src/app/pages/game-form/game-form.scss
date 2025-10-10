@@ -1,50 +1,36 @@
-/* src/app/pages/game-form/game-form.scss */
-
-/* --- PALETA DE CORES DEFINITIVA (COMPLETA) --- */
-$color-dark: #141414;        /* Fundo Principal (Preto Escuro) */
-$color-surface: #2C2C2C;     /* Fundo Secundário (Container do Formulário) */
-$color-accent: #A2FF01;      /* Verde Neon (Foco/Primário) */
-$color-accent-dark: #7ac000; /* Verde Escuro para Gradiente */
-$color-text-primary: #FFFFFF;   /* Texto Principal */
-$color-text-secondary: #B0B0B0; /* Cinza Suave para Labels */
-
-// 🚨 CORREÇÃO: Definindo a variável faltante
-$color-text: #030303;        /* Cor do texto nos botões (Preto) */
-
-
-/* --- VARIÁVEIS DE GLASSMORFISMO (Fosco no fundo escuro) --- */
-$glass-bg: rgba(67, 67, 67, 0.4); 
-$glass-border: rgba(162, 255, 1, 0.3); 
-
+$color-accent: #A2FF01;
+$color-text-primary: #FFFFFF;
+$color-text-secondary: #d1d1d1;
+$glass-bg: rgba(30, 30, 30, 0.6);
+$glass-border: rgba(255, 255, 255, 0.2);
 
 // Container principal do formulário
 .form-container {
   max-width: 900px;
   margin: 40px auto;
-  padding: 40px;
+  padding: 32px;
   
-  /* Aplicando o Vidro Fosco (Glassmorphism) */
   background: $glass-bg;
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
   border-radius: 16px;
-  border: 1px solid $glass-border; 
-  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.6); 
+  border: 1px solid $glass-border;
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
 }
 
 // Títulos
 h2 {
   color: $color-text-primary;
-  margin-bottom: 8px;
-  font-size: 2.4em;
+  margin-bottom: 5px;
+  font-size: 2.2em;
   font-weight: 700;
 }
+
 .subtitle {
   color: $color-text-secondary;
   margin-bottom: 40px;
   font-size: 1.1em;
   font-weight: 300;
-  letter-spacing: 0.5px;
 }
 
 // Grid para campos menores
@@ -60,25 +46,19 @@ h2 {
   margin-top: 24px;
 }
 
-/* ----------------------------------------------------------------- */
-/* --- Customização Impecável dos Componentes Material ---            */
-/* ----------------------------------------------------------------- */
+// --- Customização Impecável dos Componentes Material ---
 
 ::ng-deep .mat-mdc-form-field {
-  
-  input.mat-mdc-input-element, 
-  textarea.mat-mdc-input-element,
-  .mat-mdc-select-value {
-    color: $color-text-primary !important;
-    letter-spacing: 0.5px !important;
+  // Correção do letter-spacing
+  input.mat-mdc-input-element,
+  textarea.mat-mdc-input-element {
+    letter-spacing: 0.5px !important; // Força a aplicação
   }
-  
+
   .mat-mdc-text-field-wrapper {
     background-color: rgba(0, 0, 0, 0.2);
-    border-radius: 8px 8px 0 0;
   }
-  
-  .mat-mdc-select-value, input.mat-mdc-input-element {
+  .mat-mdc-select-value {
     color: $color-text-primary;
   }
   .mdc-floating-label {
@@ -101,7 +81,7 @@ h2 {
   }
 }
 
-/* Slider */
+// Slider
 .progress-section {
   .progress-label {
     color: $color-text-secondary;
@@ -121,7 +101,7 @@ h2 {
   }
 }
 
-/* Área dos Botões */
+// Área dos Botões
 .button-actions {
   display: flex;
   justify-content: flex-end;
@@ -132,12 +112,11 @@ h2 {
     padding: 0 32px;
     height: 48px;
     font-weight: bold;
-    border-radius: 12px;
+    border-radius: 8px;
     border: none;
     transition: all 0.3s ease;
   }
 
-  // Botão Secundário (Cancelar)
   button:not([mat-raised-button]) {
     background-color: transparent;
     border: 1px solid $glass-border;
@@ -150,17 +129,14 @@ h2 {
     }
   }
   
-  // Botão Primário (Salvar) - Com Gradiente e Sombra Aprimorada
   button[mat-raised-button] {
-    /* 🚨 CORREÇÃO: Usando a variável definida no topo */
-    color: $color-text !important; /* Texto Preto */
-    background: linear-gradient(45deg, $color-accent-dark, $color-accent);
-
-    box-shadow: 0 4px 20px rgba($color-accent, 0.4); 
+    background-color: $color-accent;
+    color: #121212;
+    box-shadow: 0 0 10px rgba($color-accent, 0.5), 0 0 20px rgba($color-accent, 0.3);
 
     &:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 8px 30px rgba($color-accent, 0.5);
+      transform: translateY(-2px);
+      box-shadow: 0 0 15px rgba($color-accent, 0.7), 0 0 30px rgba($color-accent, 0.5);
     }
   }
 }
