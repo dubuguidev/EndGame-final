@@ -4,11 +4,12 @@ import { Header } from './shared/header/header';
 import { CommonModule } from '@angular/common'; 
 import { AuthService } from './core/auth.service'; 
 import { Observable, filter, map } from 'rxjs'; // Importar filter e map para o router
+import { Footer } from './shared/footer/footer';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, Header, CommonModule],
+  imports: [RouterOutlet, Header, CommonModule, Footer],
   templateUrl: './app.html',
   styleUrls: ['./app.scss']
 })

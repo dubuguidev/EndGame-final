@@ -1,0 +1,38 @@
+$color-accent: #A2FF01; // 
+$text-secondary: #adb5bd;
+$bg-footer: #1e1e1e;
+$border-color: rgba(255, 255, 255, 0.15);
+
+.app-footer {
+  background-color: $bg-footer;
+  color: $text-secondary;
+  padding: 24px;
+  border-top: 1px solid $border-color;
+  text-align: center;
+  flex-shrink: 0; // Impede que o footer encolha
+}
+
+.footer-content {
+  max-width: 900px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+.footer-links {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+
+  a {
+    color: $text-secondary;
+    text-decoration: none;
+    transition: color 0.2s ease-in-out;
+
+    &:hover {
+      color: $color-accent;
+    }
+  }
+}
