@@ -159,3 +159,34 @@ mat-card-actions {
     }
 }
 
+.lgpd-section {
+  margin: 16px 0;
+  
+  span {
+    // Melhora o alinhamento do texto com o checkbox
+    display: inline-block;
+    vertical-align: middle;
+    line-height: 1.4;
+  }
+
+  a {
+    cursor: pointer;
+    color: #000000; // Sua cor de destaque
+    text-decoration: underline;
+
+    &:hover {
+      text-decoration: none;
+    }
+  }
+}
+
+.register-footer-info {
+  text-align: center;
+  margin-top: 20px;
+  
+  .terms-link {
+    cursor: pointer;
+    color: #A2FF01;
+    font-weight: bold;
+  }
+}

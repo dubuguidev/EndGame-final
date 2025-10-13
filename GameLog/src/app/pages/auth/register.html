@@ -1,12 +1,9 @@
 <div class="auth-wrapper">
     <mat-card class="login-card">
-        
         <mat-card-title class="main-title">Crie sua conta EndGame</mat-card-title>
         
         <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
-            
             <mat-card-content class="auth-content">
-                
                 <mat-form-field appearance="outline" class="full-width">
                     <mat-label>Nome de Usuário*</mat-label>
                     <input matInput formControlName="username" required>
@@ -26,21 +23,28 @@
                     <mat-label>Confirme a Senha*</mat-label>
                     <input matInput formControlName="confirmPassword" type="password" required>
                 </mat-form-field>
+
+                <div class="lgpd-section">
+                    <mat-checkbox formControlName="lgpdAccepted" color="primary">
+                        <span>Eu li e aceito os 
+                          <a (click)="openLgpdDialog()">Termos de Serviço e Política de LGPD</a>.
+                        </span>
+                    </mat-checkbox>
+                </div>
+
             </mat-card-content>
 
             <mat-card-actions class="auth-actions">
-                <button mat-raised-button color="primary" type="submit" class="full-width login-button">
+                <button mat-raised-button color="primary" type="submit" [disabled]="!registerForm.valid" class="full-width login-button">
                     Cadastrar
                 </button>
             </mat-card-actions>
         </form>
         
         <div class="register-footer-info">
-            <p class="terms-text">
-                Ao se cadastrar, você concorda com nossos 
-                <a (click)="openLgpdDialog()" class="terms-link">Termos de Serviço e Política de LGPD</a>.
-            </p>
+             <p class="terms-text">
+                Já tem uma conta? <a (click)="goToLogin()" class="terms-link">Faça Login</a>
+             </p>
         </div>
-
     </mat-card>
 </div>

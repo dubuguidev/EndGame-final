@@ -50,7 +50,7 @@ export class Register implements OnInit {
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(6)]],
       confirmPassword: ['', Validators.required],
-      // lgpdAccepted: [false, Validators.requiredTrue]
+      lgpdAccepted: [false, Validators.requiredTrue]
     });
   }
 
