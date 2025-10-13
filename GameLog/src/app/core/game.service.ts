@@ -173,15 +173,15 @@ export class GameService {
     if (existingIndex > -1) {
       currentGames[existingIndex] = game;
     } else {
-      game.id = game.id || Date.now().toString(); 
+      game.id = Date.now().toString(); 
       currentGames.push(game);
     }
-    this.gamesSubject.next(currentGames);
+    this.gamesSubject.next([...currentGames]);
   }
 
   deleteGame(id: string): void {
     let currentGames = this.gamesSubject.getValue();
     currentGames = currentGames.filter(game => game.id !== id);
-    this.gamesSubject.next(currentGames);
+    this.gamesSubject.next([...currentGames]);
   }
 }

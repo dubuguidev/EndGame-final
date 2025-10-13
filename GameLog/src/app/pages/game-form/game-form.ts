@@ -13,6 +13,8 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatSliderModule } from '@angular/material/slider';
 import { TextFieldModule } from '@angular/cdk/text-field'; // <-- IMPORTANTE para o textarea auto-ajustável
 
+import { GameService } from '../../core/game.service';
+
 @Component({
   selector: 'app-game-form',
   standalone: true,
@@ -35,8 +37,8 @@ export class GameFormComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    private router: Router
-    // Adicione seus serviços aqui (ex: GameService)
+    private router: Router,
+    private gameService: GameService
   ) {}
 
   ngOnInit(): void {
@@ -52,8 +54,13 @@ export class GameFormComponent implements OnInit {
   }
 
   onSubmit(): void {
-    // Sua lógica para salvar
-    console.log(this.gameForm.value);
+if (this.gameForm.valid) {
+      this.gameService.saveGame(this.gameForm.value);
+      alert('Jogo salvo com sucesso!');
+      this.router.navigate(['/games']);
+    } else {
+      alert('Por favor, preencha os campos corretamente.');
+    }    console.log(this.gameForm.value);
   }
 
   onCancel(): void {
