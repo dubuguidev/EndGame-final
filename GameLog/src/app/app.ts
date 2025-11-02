@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { RouterOutlet, Router, NavigationEnd, ActivatedRoute } from '@angular/router'; // Importar Router e ActivatedRoute
+import { RouterOutlet, Router, NavigationEnd, ActivatedRoute, Event as RouterEvent } from '@angular/router';
 import { Header } from './shared/header/header'; 
 import { CommonModule } from '@angular/common'; 
 import { AuthService } from './core/auth.service'; 
-import { Observable, filter, map } from 'rxjs'; // Importar filter e map para o router
+import { Observable, filter, map } from 'rxjs';
 import { Footer } from './shared/footer/footer';
 
 @Component({
@@ -28,10 +28,9 @@ export class App implements OnInit {
   
   ngOnInit(): void {
     this.router.events.pipe(
-      filter(event => event instanceof NavigationEnd)
+      filter((event: RouterEvent): event is NavigationEnd => event instanceof NavigationEnd)
     ).subscribe((event: NavigationEnd) => {
       const currentUrl = event.urlAfterRedirects;
-      
       this.shouldShowHeader = !currentUrl.includes('/login') && !currentUrl.includes('/register');
     });
   }
